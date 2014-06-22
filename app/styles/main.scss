@@ -1,0 +1,72 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
+// endbower
+
+html, body {
+    height: 100%;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  padding-top: 6px;
+  border-bottom: 1px solid #e5e5e5;
+
+  /* Make the masthead heading the same height as the navigation */
+  h3 {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 40px;
+    padding-bottom: 6px;
+  }
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 10px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media screen and (min-width: $screen-md-min) {
+  .container {
+    max-width: 960px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 10px;
+  }
+}
+
+.buttons {
+  margin-top: 40px;
+}
+
+.button-center {
+  width: 10em;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -120%);
+}
