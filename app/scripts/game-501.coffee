@@ -9,6 +9,7 @@ Polymer('game-501', {
   state: null
 
   dartsUi: null
+  listeners: []
 
   totalScore: null
   scores: []
@@ -27,7 +28,8 @@ Polymer('game-501', {
       @deactivate()
 
   activate: ->
-    @dartsUi.addEventListener 'hit', (@onHit).bind @
+    @addEventListener 'hit', @onHit.bind(@)
+
     @dartsUi.setAttribute 'focuses', ''
 
     @totalScore = 501
@@ -38,15 +40,17 @@ Polymer('game-501', {
     @state = @State.PLAYING
 
   deactivate: ->
-    @dartsUi.removeEventListener 'hit', (@onHit).bind @
+    @removeEventListener()
 
     @state = @State.NOT_STARTED
 
   onHit: (event) ->
+    if @count is 1
+      @scores.push []
+
     {score, ratio} = event.detail
 
-    @scores.push score * ratio
-    console.log @scores
+    @scores[@scores.length - 1].push score * ratio
 
     prevScore = @totalScore
     @totalScore -= (score * ratio)
@@ -62,5 +66,13 @@ Polymer('game-501', {
 
   finish: ->
     console.log 'Finish!'
+    @deactivate()
 
+  addEventListener: (event, listener) ->
+    @dartsUi.addEventListener event, listener
+    @listeners.push {event, listener}
+
+  removeEventListener: ->
+    for {event, listener} in @listeners
+      @dartsUi.removeEventListener event, listener
 });

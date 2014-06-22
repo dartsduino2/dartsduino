@@ -8,6 +8,7 @@
       501
     </span>
 
+    <!--
     <div>
       Round : {{round}}
     </div>
@@ -17,32 +18,29 @@
     <div>
       Score : {{totalScore}}
     </div>
+    -->
 
     <table class="score table table-bordered table-striped col-md-6">
       <caption></caption>
-      <tr bgcolor="#cccccc">
+      <tr>
         <th><br></th>
-        <th>A</th>
-        <th>B</th>
-        <th>C</th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
       </tr>
+
+      <template repeat="{{ss, r in scores}}">
+        <tr>
+          <td>{{r+1}}</td>
+          <template repeat="{{s in ss}}">
+            <td>{{s}}</td>
+          </template>
+        </tr>
+      </template>
+
       <tr>
-        <td>1</td>
-        <td>A1</td>
-        <td>B1</td>
-        <td>C1</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>A2</td>
-        <td>B2</td>
-        <td>C2</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>A3</td>
-        <td>B3</td>
-        <td>C3</td>
+        <td>スコア</td>
+        <td colspan="3">{{totalScore}}</td>
       </tr>
     </table>
   </template>
