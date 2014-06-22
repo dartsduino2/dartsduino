@@ -1,48 +1,6 @@
 'use strict'
 
-Polymer('game-501', {
-
-  State:
-    NOT_STARTED: 0
-    PLAYING: 1
-
-  state: null
-
-  dartsUi: null
-  listeners: []
-
-  totalScore: null
-  scores: []
-  round: null
-  count: null
-
-  ready: ->
-    @dartsUi = document.querySelector 'darts-ui'
-
-    @state = @State.NOT_STARTED
-
-  activeChanged: (oldValue, newValue) ->
-    if newValue isnt null
-      @activate()
-    else
-      @deactivate()
-
-  activate: ->
-    @addEventListener 'hit', @onHit.bind(@)
-
-    @dartsUi.setAttribute 'focuses', ''
-
-    @totalScore = 501
-    @scores = []
-    @round = 1
-    @count = 1
-
-    @state = @State.PLAYING
-
-  deactivate: ->
-    @removeEventListener()
-
-    @state = @State.NOT_STARTED
+Polymer 'game-501',
 
   onHit: (event) ->
     if @count is 1
@@ -63,16 +21,3 @@ Polymer('game-501', {
     if @count > 3
       @count = 1
       @round++
-
-  finish: ->
-    console.log 'Finish!'
-    @deactivate()
-
-  addEventListener: (event, listener) ->
-    @dartsUi.addEventListener event, listener
-    @listeners.push {event, listener}
-
-  removeEventListener: ->
-    for {event, listener} in @listeners
-      @dartsUi.removeEventListener event, listener
-});
