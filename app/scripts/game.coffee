@@ -13,13 +13,11 @@ class Game
     $(window).resize =>
       @resizeWindow()
 
-    dartsUi = document.querySelector 'darts-ui'
-    dartsUi.addEventListener 'hit', (event) ->
-      {score, ratio} = event.detail
-      console.log score + ', ' + ratio + ' = ' + score * ratio
-
     $('#select-button').click @start
     $('#cancel-button').click @cancel
+
+    game = document.querySelector 'game-cricket'
+    game.setAttribute 'active', ''
 
   resizeWindow: ->
     bodyHeight = $('body').height()

@@ -1,0 +1,35 @@
+<polymer-element name="game-cricket" extends="game-base">
+  <template>
+    <link rel="stylesheet" href="../styles/game-cricket.css">
+
+    <span class="title">
+      {{title}}
+    </span>
+
+    <table class="score table table-bordered table-striped col-md-6">
+      <caption></caption>
+      <tr>
+        <th><br></th>
+        <th>1</th>
+        <th>2</th>
+        <th>3</th>
+      </tr>
+
+      <template repeat="{{ss, r in scores}}">
+        <tr>
+          <td>{{r+1}}</td>
+          <template repeat="{{s in ss}}">
+            <td>{{s}}</td>
+          </template>
+        </tr>
+      </template>
+
+      <tr>
+        <td>スコア</td>
+        <td colspan="3">{{totalScore}}</td>
+      </tr>
+    </table>
+  </template>
+
+  <script src="../scripts/game-cricket.js"></script>
+</polymer-element>
