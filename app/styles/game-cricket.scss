@@ -14,3 +14,14 @@
 th, tr {
   text-align: center;
 }
+
+td > div {
+  position: relative;
+  margin-left: 2em;
+
+  > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
