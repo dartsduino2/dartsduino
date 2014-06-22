@@ -32,10 +32,10 @@ class Game
     $('darts-ui')
       .attr 'width', length
       .attr 'height', length
-      .css('margin-left', marginLeft)
+      .css 'margin-left', marginLeft
 
   start: =>
-    $('#myModal').modal('hide')
+    $('#myModal').modal 'hide'
     @changeState State.PLAYING
 
   cancel: =>
