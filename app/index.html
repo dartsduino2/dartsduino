@@ -52,6 +52,31 @@
       </div>
     </div>
 
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">ゲームを選択</h4>
+          </div>
+
+          <div class="modal-body">
+            <input type="radio" name="person" value="1" checked="checked">1人
+            <input type="radio" name="person" value="2">2人
+            <br>
+
+            <input type="radio" name="type" value="501" checked="checked">501
+            <input type="radio" name="type" value="Cricket">Cricket
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+            <button type="button" class="btn btn-primary" id="select-button">決定</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
