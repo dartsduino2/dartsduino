@@ -23,7 +23,34 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <darts-ui></darts-ui>
+    <div style="position: relative; background-color: gray;">
+      <a href="https://5jcup.org/works/5357afa02d0f47cb51000097" target="_blank">
+        <div style="background: url('https://googledrive.com/host/0B4ICVdbWz1ZDcnFDWVBzOFN1aDg/149_149/right/ribbon_orange_right01.png') no-repeat;
+          position: absolute; right: 0; top: 0; height: 149px; width: 149px">
+        </div>
+      </a>
+    </div>
+
+    <div class="container">
+      <div class="header">
+        <h3 class="text-muted">dartsduino</h3>
+      </div>
+
+      <darts-ui></darts-ui>
+
+      <div class="buttons">
+        <button id="cancel-button" class="btn btn-warning button-center">
+          中断
+        </button>
+        <button id="start-button" class="btn btn-primary button-center" data-toggle="modal" data-target="#myModal">
+          スタート!
+        </button>
+      </div>
+
+      <div class="footer">
+        <p>&copy; 2014 Ikuo Terado</p>
+      </div>
+    </div>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -59,6 +86,7 @@
         <!-- endbuild -->
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/game.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
 </body>
