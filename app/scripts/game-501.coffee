@@ -2,6 +2,9 @@
 
 Polymer 'game-501',
 
+  initialize: ->
+    @title = 501
+
   onHit: (event) ->
     if @count is 1
       @scores.push []

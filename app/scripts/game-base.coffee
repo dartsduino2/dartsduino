@@ -9,6 +9,7 @@ Polymer 'game-base',
   dartsUi: null
   state: null
   listeners: []
+  title: ''
 
   totalScore: null
   scores: []
@@ -19,6 +20,8 @@ Polymer 'game-base',
     @dartsUi = document.querySelector 'darts-ui'
 
     @state = @State.NOT_STARTED
+
+    @initialize?()
 
   activeChanged: (oldValue, newValue) ->
     if newValue isnt null
