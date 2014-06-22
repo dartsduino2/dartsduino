@@ -1,0 +1,16 @@
+
+@import "game-base.scss";
+
+.score {
+  position: absolute;
+  top: 80px;
+  left: 12%;
+
+  width: 20%;
+
+  background-color: #fff;
+}
+
+th, tr {
+  text-align: center;
+}
