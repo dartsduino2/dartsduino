@@ -6,27 +6,29 @@
       {{title}}
     </span>
 
-    <table class="score table table-bordered table-striped col-md-6">
-      <caption></caption>
+    <table class="score table table-bordered table-striped">
       <tr>
-        <th><br></th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
+        <th>Player 1</th>
+        <th></th>
+        <th>Player 2</th>
       </tr>
 
-      <template repeat="{{ss, r in scores}}">
+      <template repeat="{{p in POINTS}}">
         <tr>
-          <td>{{r+1}}</td>
-          <template repeat="{{s in ss}}">
-            <td>{{s}}</td>
-          </template>
+          <td>／</td>
+          <td>{{p}}</td>
+          <td>
+            <span>／</span>
+            <span>＼</span>
+            <span>◯</span>
+          </td>
         </tr>
       </template>
 
       <tr>
+        <td>0</td>
         <td>スコア</td>
-        <td colspan="3">{{totalScore}}</td>
+        <td>0</td>
       </tr>
     </table>
   </template>
