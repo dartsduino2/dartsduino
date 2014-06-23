@@ -15,6 +15,10 @@ th, tr {
   text-align: center;
 }
 
+th.focus {
+  background-color: yellow !important;
+}
+
 td > div {
   position: relative;
   margin-left: 2em;

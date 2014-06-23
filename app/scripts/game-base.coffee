@@ -13,6 +13,7 @@ Polymer 'game-base',
   title: ''
 
   playerList: null
+  currentPlayer: null
   currentPlayerIndex: null
 
   ready: ->
@@ -42,6 +43,7 @@ Polymer 'game-base',
         name: 'Player ' + i
       @playerList.push player
     @currentPlayerIndex = 0
+    @currentPlayer = @playerList[@currentPlayerIndex]
 
     @start?()
 
@@ -81,13 +83,13 @@ Polymer 'game-base',
     for {event, listener} in @listeners
       @dartsUi.removeEventListener event, listener
 
-  getCurrentPlayer: ->
-    return @playerList[@currentPlayerIndex]
-
   nextPlayer: ->
+    isNext = false
     @currentPlayerIndex++
     if @currentPlayerIndex >= @playerList.length
       @currentPlayerIndex = 0
-      return true
+      isNext = true
 
-    return false
+    @currentPlayer = @playerList[@currentPlayerIndex]
+
+    return isNext

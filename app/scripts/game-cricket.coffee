@@ -22,7 +22,7 @@ Polymer 'game-cricket',
     @count = 1
 
   onHit: (event) ->
-    id = @getCurrentPlayer().id
+    id = @currentPlayer.id
 
     point = parseInt event.detail.point
     ratio = parseInt event.detail.ratio

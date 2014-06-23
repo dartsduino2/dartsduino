@@ -8,9 +8,13 @@
 
     <table class="score table table-bordered table-striped">
       <tr>
-        <th>{{playerList[0].name}}</th>
+        <th class="{{ {focus: currentPlayer.id == 0} | tokenList }}">
+          {{playerList[0].name}}
+        </th>
         <th></th>
-        <th>{{playerList[1].name}}</th>
+        <th class="{{ {focus: currentPlayer.id == 1} | tokenList }}">
+          {{playerList[1].name}}
+        </th>
       </tr>
 
       <template repeat="{{p in POINTS}}">
