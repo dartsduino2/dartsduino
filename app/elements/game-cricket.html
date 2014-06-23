@@ -8,16 +8,16 @@
 
     <table class="score table table-bordered table-striped">
       <tr>
-        <th>Player 1</th>
+        <th>{{playerList[0].name}}</th>
         <th></th>
-        <th>Player 2</th>
+        <th>{{playerList[1].name}}</th>
       </tr>
 
       <template repeat="{{p in POINTS}}">
         <tr>
           <td>
             <div>
-              <template repeat="{{c in MARKS[scores[p]]}}">
+              <template repeat="{{c in MARKS[scores[0][p]]}}">
                 <span>{{c}}</span>
               </template>
             </div>
@@ -25,9 +25,9 @@
           <td>{{p}}</td>
           <td>
             <div>
-              <span>／</span>
-              <span>＼</span>
-              <span>◯</span>
+              <template repeat="{{c in MARKS[scores[1][p]]}}">
+                <span>{{c}}</span>
+              </template>
             </div>
           </td>
         </tr>

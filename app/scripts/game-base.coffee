@@ -35,6 +35,14 @@ Polymer 'game-base',
 
     @dartsUi.setAttribute 'focuses', ''
 
+    @playerList = []
+    for i in [1..(@players || 1)]
+      player =
+        id: i - 1
+        name: 'Player ' + i
+      @playerList.push player
+    @currentPlayerIndex = 0
+
     @start?()
 
     @state = @State.PLAYING
@@ -73,18 +81,6 @@ Polymer 'game-base',
     for {event, listener} in @listeners
       @dartsUi.removeEventListener event, listener
 
-  playersChanged: (oldValue, newValue) ->
-    @playerList = []
-    for i in [1..newValue]
-      player =
-        id: i - 1
-        name: 'Player ' + i
-      @playerList.push player
-
-    console.log @playerList
-
-    @currentPlayerIndex = 0
-
   getCurrentPlayer: ->
     return @playerList[@currentPlayerIndex]
 
@@ -92,3 +88,6 @@ Polymer 'game-base',
     @currentPlayerIndex++
     if @currentPlayerIndex >= @playerList.length
       @currentPlayerIndex = 0
+      return true
+
+    return false

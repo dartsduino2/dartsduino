@@ -6,23 +6,43 @@ Polymer 'game-cricket',
   MARKS: [[''], ['／'], ['／', '＼'], ['／', '＼', '◯']]
 
   scores: {}
+  round: null
+  count: null
 
   initialize: ->
     @title = 'Cricket'
 
+  start: ->
+    scores = {}
+    for player in @playerList
+      @scores[player.id] = {}
+
+    @round = 1
+    @count = 1
+
   onHit: (event) ->
-    {point, ratio} = event.detail
+    id = @getCurrentPlayer().id
 
-    if point < 15
-      return
-    else if point is '25'
-      point = 'Bull'
+    point = parseInt event.detail.point
+    ratio = parseInt event.detail.ratio
 
-    if @scores[point]?
-      @scores[point] += 1
-      if @scores[point] > 3
-        @scores[point] = 3
-    else
-      @scores[point] = 1
+    if point >= 15
+      if point is '25'
+        point = 'Bull'
 
-    console.log @scores
+      if @scores[id][point]?
+        @scores[id][point] += ratio
+        if @scores[id][point] > 3
+          @scores[id][point] = 3
+      else
+        @scores[id][point] = ratio
+
+    # console.log @scores
+
+    @count++
+    if @count > 3
+      @count = 1
+      isNextRound = @nextPlayer()
+
+      if isNextRound
+        @round++
