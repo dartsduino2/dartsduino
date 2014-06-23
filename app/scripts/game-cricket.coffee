@@ -4,6 +4,7 @@ Polymer 'game-cricket',
 
   POINTS: [20, 19, 18, 17, 16, 15, 'Bull']
   MARKS: [[''], ['／'], ['／', '＼'], ['／', '＼', '◯']]
+  MAX_SCORE: 3
 
   scores: {}
   round: null
@@ -32,8 +33,8 @@ Polymer 'game-cricket',
 
       if @scores[id][point]?
         @scores[id][point] += ratio
-        if @scores[id][point] > 3
-          @scores[id][point] = 3
+        if @scores[id][point] > @MAX_SCORE
+          @scores[id][point] = @MAX_SCORE
       else
         @scores[id][point] = ratio
 
