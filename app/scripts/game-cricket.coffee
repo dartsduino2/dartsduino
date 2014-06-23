@@ -37,7 +37,7 @@ Polymer 'game-cricket',
     if point >= 15
       score = point * ratio
 
-      if point is '25'
+      if point is 25
         point = 'Bull'
 
       if @scores[id][point] >= @MAX_SCORE
