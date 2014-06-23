@@ -15,7 +15,13 @@
 
       <template repeat="{{p in POINTS}}">
         <tr>
-          <td>／</td>
+          <td>
+            <div>
+              <template repeat="{{c in MARKS[scores[p]]}}">
+                <span>{{c}}</span>
+              </template>
+            </div>
+          </td>
           <td>{{p}}</td>
           <td>
             <div>
