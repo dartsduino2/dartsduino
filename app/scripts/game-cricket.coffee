@@ -8,5 +8,5 @@ Polymer 'game-cricket',
     @title = 'Cricket'
 
   onHit: (event) ->
-    {score, ratio} = event.detail
-    console.log score
+    {point, ratio} = event.detail
+    console.log point
