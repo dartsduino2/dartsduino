@@ -16,6 +16,7 @@ class Game
     $('#select-button').click @start
     $('#cancel-button').click @cancel
 
+    # game = document.querySelector 'game-501'
     game = document.querySelector 'game-cricket'
     game.setAttribute 'active', ''
 

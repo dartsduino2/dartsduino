@@ -23,6 +23,8 @@ Polymer 'game-base',
 
     @initialize?()
 
+    @setVisibility false
+
   activeChanged: (oldValue, newValue) ->
     if newValue isnt null
       @activate()
@@ -39,12 +41,22 @@ Polymer 'game-base',
     @round = 1
     @count = 1
 
+    @setVisibility true
+
     @state = @State.PLAYING
 
   deactivate: ->
     @removeEventListener()
 
+    @setVisibility false
+
     @state = @State.NOT_STARTED
+
+  setVisibility: (isVisible) ->
+    if isVisible
+      @.classList.remove 'invisible'
+    else
+      @.classList.add 'invisible'
 
   onHit: (event) ->
     {score, ratio} = event.detail
