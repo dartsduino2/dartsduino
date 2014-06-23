@@ -6,7 +6,9 @@ Polymer 'game-cricket',
   MARKS: [[''], ['／'], ['／', '＼'], ['／', '＼', '◯']]
   MAX_SCORE: 3
 
+  totalScores: {}
   scores: {}
+  closedPoint: {}
   round: null
   count: null
 
@@ -14,9 +16,14 @@ Polymer 'game-cricket',
     @title = 'Cricket'
 
   start: ->
-    scores = {}
+    @totalScores = {}
+    @scores = {}
     for player in @playerList
+      @totalScores[player.id] = 0
+
       @scores[player.id] = {}
+      for point in @POINTS
+        @scores[player.id][point] = 0
 
     @round = 1
     @count = 1
@@ -28,17 +35,25 @@ Polymer 'game-cricket',
     ratio = parseInt event.detail.ratio
 
     if point >= 15
+      score = point * ratio
+
       if point is '25'
         point = 'Bull'
 
-      if @scores[id][point]?
-        @scores[id][point] += ratio
-        if @scores[id][point] > @MAX_SCORE
-          @scores[id][point] = @MAX_SCORE
+      if @scores[id][point] >= @MAX_SCORE
+        if not @closedPoint[point]?
+          @totalScores[id] += score
       else
-        @scores[id][point] = ratio
+        @scores[id][point] += ratio
+
+        if @scores[id][point] >= @MAX_SCORE
+          @scores[id][point] = @MAX_SCORE
+
+          if @scores[1 - id][point] >= @MAX_SCORE
+            @closedPoint[point] = true
 
     # console.log @scores
+    # console.log @closedPoint
 
     @count++
     if @count > 3
