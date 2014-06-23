@@ -5,16 +5,12 @@ Polymer 'game-base',
   State:
     NOT_STARTED: 0
     PLAYING: 1
+    FINISHED: 2
 
   dartsUi: null
   state: null
   listeners: []
   title: ''
-
-  totalScore: null
-  scores: []
-  round: null
-  count: null
 
   ready: ->
     @dartsUi = document.querySelector 'darts-ui'
@@ -36,21 +32,18 @@ Polymer 'game-base',
 
     @dartsUi.setAttribute 'focuses', ''
 
-    @totalScore = 501
-    @scores = []
-    @round = 1
-    @count = 1
-
-    @setVisibility true
+    @start?()
 
     @state = @State.PLAYING
+
+    @setVisibility true
 
   deactivate: ->
     @removeEventListener()
 
-    @setVisibility false
-
     @state = @State.NOT_STARTED
+
+    @setVisibility false
 
   setVisibility: (isVisible) ->
     if isVisible
@@ -59,12 +52,15 @@ Polymer 'game-base',
       @.classList.add 'invisible'
 
   onHit: (event) ->
-    {score, ratio} = event.detail
-    console.log score + ' * ' + ratio + ' = ' + score * ratio
+    {point, ratio} = event.detail
+    console.log point + ' * ' + ratio + ' = ' + point * ratio
 
   finish: ->
     console.log 'Finish!'
-    @deactivate()
+
+    @removeEventListener()
+
+    @state = @State.FINISHED
 
   addEventListener: (event, listener) ->
     @dartsUi.addEventListener event, listener
