@@ -14,3 +14,23 @@
 th, tr {
   text-align: center;
 }
+
+th.focus {
+  background-color: yellow !important;
+}
+
+tr.closed > td {
+  text-decoration: line-through;
+  background-color: #bbb !important;
+}
+
+td > div {
+  position: relative;
+  margin-left: 2em;
+
+  > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

@@ -6,27 +6,43 @@
       {{title}}
     </span>
 
-    <table class="score table table-bordered table-striped col-md-6">
-      <caption></caption>
+    <table class="score table table-bordered table-striped">
       <tr>
-        <th><br></th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
+        <th class="{{ {focus: currentPlayer.id == 0} | tokenList }}">
+          {{playerList[0].name}}
+        </th>
+        <th>
+          Round {{round}}
+        </th>
+        <th class="{{ {focus: currentPlayer.id == 1} | tokenList }}">
+          {{playerList[1].name}}
+        </th>
       </tr>
 
-      <template repeat="{{ss, r in scores}}">
-        <tr>
-          <td>{{r+1}}</td>
-          <template repeat="{{s in ss}}">
-            <td>{{s}}</td>
-          </template>
+      <template repeat="{{p in POINTS}}">
+        <tr class="{{ {closed: closedPoint[p]} | tokenList }}">
+          <td>
+            <div>
+              <template repeat="{{c in MARKS[scores[0][p]]}}">
+                <span>{{c}}</span>
+              </template>
+            </div>
+          </td>
+          <td>{{p}}</td>
+          <td>
+            <div>
+              <template repeat="{{c in MARKS[scores[1][p]]}}">
+                <span>{{c}}</span>
+              </template>
+            </div>
+          </td>
         </tr>
       </template>
 
       <tr>
+        <td>{{totalScores[0]}}</td>
         <td>スコア</td>
-        <td colspan="3">{{totalScore}}</td>
+        <td>{{totalScores[1]}}</td>
       </tr>
     </table>
   </template>

@@ -5,16 +5,16 @@ Polymer 'game-base',
   State:
     NOT_STARTED: 0
     PLAYING: 1
+    FINISHED: 2
 
   dartsUi: null
   state: null
   listeners: []
   title: ''
 
-  totalScore: null
-  scores: []
-  round: null
-  count: null
+  playerList: null
+  currentPlayer: null
+  currentPlayerIndex: null
 
   ready: ->
     @dartsUi = document.querySelector 'darts-ui'
@@ -22,6 +22,8 @@ Polymer 'game-base',
     @state = @State.NOT_STARTED
 
     @initialize?()
+
+    @setVisibility false
 
   activeChanged: (oldValue, newValue) ->
     if newValue isnt null
@@ -34,25 +36,44 @@ Polymer 'game-base',
 
     @dartsUi.setAttribute 'focuses', ''
 
-    @totalScore = 501
-    @scores = []
-    @round = 1
-    @count = 1
+    @playerList = []
+    for i in [1..(@players || 1)]
+      player =
+        id: i - 1
+        name: 'Player ' + i
+      @playerList.push player
+    @currentPlayerIndex = 0
+    @currentPlayer = @playerList[@currentPlayerIndex]
+
+    @start?()
 
     @state = @State.PLAYING
+
+    @setVisibility true
 
   deactivate: ->
     @removeEventListener()
 
     @state = @State.NOT_STARTED
 
+    @setVisibility false
+
+  setVisibility: (isVisible) ->
+    if isVisible
+      @.classList.remove 'invisible'
+    else
+      @.classList.add 'invisible'
+
   onHit: (event) ->
-    {score, ratio} = event.detail
-    console.log score + ' * ' + ratio + ' = ' + score * ratio
+    {point, ratio} = event.detail
+    console.log point + ' * ' + ratio + ' = ' + point * ratio
 
   finish: ->
     console.log 'Finish!'
-    @deactivate()
+
+    @removeEventListener()
+
+    @state = @State.FINISHED
 
   addEventListener: (event, listener) ->
     @dartsUi.addEventListener event, listener
@@ -61,3 +82,14 @@ Polymer 'game-base',
   removeEventListener: ->
     for {event, listener} in @listeners
       @dartsUi.removeEventListener event, listener
+
+  nextPlayer: ->
+    isNext = false
+    @currentPlayerIndex++
+    if @currentPlayerIndex >= @playerList.length
+      @currentPlayerIndex = 0
+      isNext = true
+
+    @currentPlayer = @playerList[@currentPlayerIndex]
+
+    return isNext
