@@ -4,6 +4,7 @@ Polymer 'game-cricket',
 
   POINTS: [20, 19, 18, 17, 16, 15, 'Bull']
   MARKS: [[''], ['／'], ['／', '＼'], ['／', '＼', '◯']]
+  MAX_ROUND: 20
   MAX_SCORE: 3
 
   totalScores: {}
@@ -61,4 +62,7 @@ Polymer 'game-cricket',
       isNextRound = @nextPlayer()
 
       if isNextRound
-        @round++
+        if @round >= @MAX_ROUND
+          @finish()
+        else
+          @round++
