@@ -53,6 +53,9 @@ Polymer 'game-cricket',
           if @scores[1 - id][point] >= @MAX_SCORE
             @closedPoint[point] = true
 
+            if Object.keys(@closedPoint).length is @POINTS.length
+              @over()
+
     # console.log @scores
     # console.log @closedPoint
 
@@ -63,6 +66,10 @@ Polymer 'game-cricket',
 
       if isNextRound
         if @round >= @MAX_ROUND
-          @finish()
+          @over()
         else
           @round++
+
+  over: ->
+    # console.log 'Over'
+    @finish()
