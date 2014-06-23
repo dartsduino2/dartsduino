@@ -18,6 +18,7 @@ class Game
 
     # game = document.querySelector 'game-501'
     game = document.querySelector 'game-cricket'
+    game.setAttribute 'players', 2
     game.setAttribute 'active', ''
 
   resizeWindow: ->

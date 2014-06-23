@@ -12,6 +12,9 @@ Polymer 'game-base',
   listeners: []
   title: ''
 
+  playerList: null
+  currentPlayerIndex: null
+
   ready: ->
     @dartsUi = document.querySelector 'darts-ui'
 
@@ -69,3 +72,23 @@ Polymer 'game-base',
   removeEventListener: ->
     for {event, listener} in @listeners
       @dartsUi.removeEventListener event, listener
+
+  playersChanged: (oldValue, newValue) ->
+    @playerList = []
+    for i in [1..newValue]
+      player =
+        id: i - 1
+        name: 'Player ' + i
+      @playerList.push player
+
+    console.log @playerList
+
+    @currentPlayerIndex = 0
+
+  getCurrentPlayer: ->
+    return @playerList[@currentPlayerIndex]
+
+  nextPlayer: ->
+    @currentPlayerIndex++
+    if @currentPlayerIndex >= @playerList.length
+      @currentPlayerIndex = 0
