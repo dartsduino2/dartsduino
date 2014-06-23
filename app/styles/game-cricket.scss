@@ -19,6 +19,11 @@ th.focus {
   background-color: yellow !important;
 }
 
+tr.closed > td {
+  text-decoration: line-through;
+  background-color: #bbb !important;
+}
+
 td > div {
   position: relative;
   margin-left: 2em;

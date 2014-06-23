@@ -18,7 +18,7 @@
       </tr>
 
       <template repeat="{{p in POINTS}}">
-        <tr>
+        <tr class="{{ {closed: closedPoint[p]} | tokenList }}">
           <td>
             <div>
               <template repeat="{{c in MARKS[scores[0][p]]}}">
