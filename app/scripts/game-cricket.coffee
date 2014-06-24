@@ -80,8 +80,7 @@ Polymer 'game-cricket',
         winner = [player]
         score = @totalScores[player.id]
 
-    if winner.length > 1
-      winner = null
+    winner = if winner.length > 1 then null else winner[0]
 
     @finish
       player: winner

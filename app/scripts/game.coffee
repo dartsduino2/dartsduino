@@ -20,6 +20,7 @@ class Game
     game = document.querySelector 'game-cricket'
     game.setAttribute 'players', 2
     game.setAttribute 'active', ''
+    game.addEventListener 'finish', @onFinish
 
   resizeWindow: ->
     bodyHeight = $('body').height()
@@ -53,5 +54,18 @@ class Game
       when State.PLAYING
         $('#start-button').hide()
         $('#cancel-button').show()
+
+  onFinish: (result) =>
+    player = result.detail.player
+    if player is null
+      winner = '引き分け'
+    else
+      winner = "#{player.name} の勝ち!"
+
+    $('#winner').text winner
+
+    $('#resultModal').modal 'show'
+
+    @changeState State.NOT_STARTED
 
 window.Game = Game
