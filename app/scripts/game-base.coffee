@@ -68,12 +68,14 @@ Polymer 'game-base',
     {point, ratio} = event.detail
     console.log point + ' * ' + ratio + ' = ' + point * ratio
 
-  finish: ->
+  finish: (result) ->
     console.log 'Finish!'
 
     @removeEventListener()
 
     @state = @State.FINISHED
+
+    @.fire 'finish', result
 
   addEventListener: (event, listener) ->
     @dartsUi.addEventListener event, listener
@@ -82,6 +84,8 @@ Polymer 'game-base',
   removeEventListener: ->
     for {event, listener} in @listeners
       @dartsUi.removeEventListener event, listener
+
+    return
 
   nextPlayer: ->
     isNext = false
