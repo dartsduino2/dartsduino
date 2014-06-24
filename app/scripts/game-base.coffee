@@ -83,6 +83,8 @@ Polymer 'game-base',
     for {event, listener} in @listeners
       @dartsUi.removeEventListener event, listener
 
+    return
+
   nextPlayer: ->
     isNext = false
     @currentPlayerIndex++
