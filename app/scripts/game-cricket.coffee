@@ -71,5 +71,18 @@ Polymer 'game-cricket',
           @round++
 
   over: ->
-    # console.log 'Over'
-    @finish()
+    winner = []
+    score = -1
+    for player in @playerList
+      if score is @totalScores[player.id]
+        winner.push player
+      else if score < @totalScores[player.id]
+        winner = [player]
+        score = @totalScores[player.id]
+
+    if winner.length > 1
+      winner = null
+
+    @finish
+      player: winner
+      score: score
