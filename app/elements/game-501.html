@@ -11,24 +11,28 @@
     <table class="score table table-bordered table-striped col-md-6">
       <caption></caption>
       <tr>
-        <th><br></th>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
+        <th></th>
+        <template repeat="{{p, i in playerList}}">
+          <th class="{{ {focus: currentPlayer.id == i} | tokenList }}">
+            {{p.name}}
+          </th>
+        </template>
       </tr>
 
-      <template repeat="{{ss, r in scores}}">
+      <template repeat="{{ss, r in scores[0]}}">
         <tr>
           <td>{{r+1}}</td>
-          <template repeat="{{s in ss}}">
-            <td>{{s}}</td>
+          <template repeat="{{p, i in playerList}}">
+            <th>{{scores[i][r]}}</th>
           </template>
         </tr>
       </template>
 
       <tr>
         <td>スコア</td>
-        <td colspan="3">{{totalScore}}</td>
+        <template repeat="{{p, i in playerList}}">
+          <th>{{totalScores[i]}}</th>
+        </template>
       </tr>
     </table>
   </template>
