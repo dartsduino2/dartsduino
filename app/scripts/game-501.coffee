@@ -2,8 +2,10 @@
 
 Polymer 'game-501',
 
-  totalScore: null
-  scores: []
+  MAX_ROUND: 20
+
+  totalScores: null
+  scores: null
   round: null
   count: null
 
@@ -11,27 +13,59 @@ Polymer 'game-501',
     @title = 501
 
   start: ->
-    @totalScore = 501
-    @scores = []
+    @totalScores = {}
+    @scores = {}
+    for player in @playerList
+      @totalScores[player.id] = 501
+
+      @scores[player.id] = []
+
     @round = 1
     @count = 1
 
   onHit: (event) ->
+    id = @currentPlayer.id
+
+    point = parseInt event.detail.point
+    ratio = parseInt event.detail.ratio
+    score = point * ratio
+
     if @count is 1
-      @scores.push []
+      @scores[id].push score
+    else
+      @scores[id][@scores[id].length - 1] += score
 
-    {point, ratio} = event.detail
-
-    @scores[@scores.length - 1].push point * ratio
-
-    prevScore = @totalScore
-    @totalScore -= (point * ratio)
-    if @totalScore < 0
-      @totalScore = prevScore
-    else if @totalScore is 0
-      @finish()
+    prevScore = @totalScores[id]
+    @totalScores[id] -= score
+    if @totalScores[id] < 0
+      @totalScores[id] = prevScore
+    else if @totalScores[id] is 0
+      @over @currentPlayer
 
     @count++
     if @count > 3
       @count = 1
-      @round++
+      isNextRound = @nextPlayer()
+
+      if isNextRound
+        if @round >= @MAX_ROUND
+          @over()
+        else
+          @round++
+
+  over: (winner) ->
+    if not winner?
+      winner = []
+      score = 1000
+      for player in @playerList
+        if score is @totalScores[player.id]
+          winner.push player
+        else if score > @totalScores[player.id]
+          winner = [player]
+          score = @totalScores[player.id]
+
+      winner = if winner.length > 1 then null else winner[0]
+
+    @finish
+      player: winner
+      score: score
