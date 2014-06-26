@@ -13,14 +13,9 @@ class Game
     $(window).resize =>
       @resizeWindow()
 
-    $('#select-button').click @start
+    $('#start-button').click @start
+    $('#select-button').click @select
     $('#cancel-button').click @cancel
-
-    game = document.querySelector 'game-501'
-    # game = document.querySelector 'game-cricket'
-    game.setAttribute 'players', 2
-    game.setAttribute 'active', ''
-    game.addEventListener 'finish', @onFinish
 
   resizeWindow: ->
     bodyHeight = $('body').height()
@@ -36,6 +31,30 @@ class Game
       .css 'margin-left', marginLeft
 
   start: =>
+    gameGroup = document.querySelector 'game-group'
+    games = (gameGroup.getAttribute 'games').split ','
+
+    gameItems = $('#gameItems')
+    gameItems.empty()
+
+    for game, i in games
+      checked = if i is 0 then 'checked="checked"' else ''
+      item = "<input type=\"radio\" name=\"type\" value=\"#{game}\" #{checked}> #{game}<br>"
+      gameItems.append item
+
+    $('#myModal').modal 'show'
+
+  select: =>
+    games = $('#gameItems input')
+    game = null
+    for g, i in games
+      if g.checked
+        game = g
+
+    game.setAttribute 'players', 2
+    game.setAttribute 'active', ''
+    game.addEventListener 'finish', @onFinish
+
     $('#myModal').modal 'hide'
     @changeState State.PLAYING
 

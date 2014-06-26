@@ -18,8 +18,7 @@
     <script src="../bower_components/platform/platform.js"></script>
     <link rel="import" href="../bower_components/darts-ui/dist/darts-ui.html">
     <link rel="import" href="elements/game-base.html">
-    <link rel="import" href="elements/game-501.html">
-    <link rel="import" href="elements/game-cricket.html">
+    <link rel="import" href="elements/game-group.html">
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -40,15 +39,13 @@
       </div>
 
       <darts-ui></darts-ui>
-
-      <game-501></game-501>
-      <game-cricket></game-cricket>
+      <game-group></game-group>
 
       <div class="buttons">
         <button id="cancel-button" class="btn btn-warning button-center">
           中断
         </button>
-        <button id="start-button" class="btn btn-primary button-center" data-toggle="modal" data-target="#myModal">
+        <button id="start-button" class="btn btn-primary button-center">
           スタート!
         </button>
       </div>
@@ -67,12 +64,12 @@
           </div>
 
           <div class="modal-body">
-            <input type="radio" name="person" value="1" checked="checked">1人
-            <input type="radio" name="person" value="2">2人
-            <br>
+            <!-- <div>
+              <input type="radio" name="person" value="1" checked="checked">1人
+              <input type="radio" name="person" value="2">2人
+            </div> -->
 
-            <input type="radio" name="type" value="501" checked="checked">501
-            <input type="radio" name="type" value="Cricket">Cricket
+            <div id="gameItems"></div>
           </div>
 
           <div class="modal-footer">

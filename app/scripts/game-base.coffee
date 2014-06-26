@@ -60,9 +60,11 @@ Polymer 'game-base',
 
   setVisibility: (isVisible) ->
     if isVisible
-      @.classList.remove 'invisible'
+      # @.classList.remove 'invisible'
+      @.style.visibility = 'visible'
     else
-      @.classList.add 'invisible'
+      # @.classList.add 'invisible'
+      @.style.visibility = 'hidden'
 
   onHit: (event) ->
     {point, ratio} = event.detail
