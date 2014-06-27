@@ -7,6 +7,7 @@ class Game
     PLAYING: 1
 
   state: State.NOT_STARTED
+  dartsUi: null
   gameGroup: null
 
   constructor: ->
@@ -18,6 +19,8 @@ class Game
     $('#select-button').click @select
     $('#cancel-button').click @cancel
     $('#result-ok').click @initialize
+
+    @dartsUi = document.querySelector 'darts-ui'
 
     @gameGroup = document.querySelector 'game-group'
     @gameGroup.addEventListener 'finish', @onFinish
@@ -36,9 +39,12 @@ class Game
       .css 'margin-left', marginLeft
 
   initialize: =>
+    @dartsUi.setAttribute 'focuses', ' '
     @gameGroup.removeAttribute 'state'
 
   start: =>
+    @dartsUi.setAttribute 'focuses', ' '
+
     games = (@gameGroup.getAttribute 'games').split ','
 
     gameItems = $('#gameItems')
