@@ -46,14 +46,13 @@ class Game
 
   select: =>
     games = $('#gameItems input')
-    game = null
+    gameTitle = null
     for g, i in games
       if g.checked
-        game = g
+        gameTitle = g.value
 
-    game.setAttribute 'players', 2
-    game.setAttribute 'active', ''
-    game.addEventListener 'finish', @onFinish
+    gameGroup = document.querySelector 'game-group'
+    gameGroup.setAttribute 'state', gameTitle + ',' + '2'
 
     $('#myModal').modal 'hide'
     @changeState State.PLAYING
