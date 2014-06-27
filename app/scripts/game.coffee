@@ -7,6 +7,8 @@ class Game
     PLAYING: 1
 
   state: State.NOT_STARTED
+  dartsUi: null
+  gameGroup: null
 
   constructor: ->
     @resizeWindow()
@@ -16,6 +18,12 @@ class Game
     $('#start-button').click @start
     $('#select-button').click @select
     $('#cancel-button').click @cancel
+    $('#result-ok').click @initialize
+
+    @dartsUi = document.querySelector 'darts-ui'
+
+    @gameGroup = document.querySelector 'game-group'
+    @gameGroup.addEventListener 'finish', @onFinish
 
   resizeWindow: ->
     bodyHeight = $('body').height()
@@ -30,9 +38,14 @@ class Game
       .attr 'height', length
       .css 'margin-left', marginLeft
 
+  initialize: =>
+    @dartsUi.setAttribute 'focuses', ' '
+    @gameGroup.removeAttribute 'state'
+
   start: =>
-    gameGroup = document.querySelector 'game-group'
-    games = (gameGroup.getAttribute 'games').split ','
+    @dartsUi.setAttribute 'focuses', ' '
+
+    games = (@gameGroup.getAttribute 'games').split ','
 
     gameItems = $('#gameItems')
     gameItems.empty()
@@ -46,14 +59,12 @@ class Game
 
   select: =>
     games = $('#gameItems input')
-    game = null
+    gameTitle = null
     for g, i in games
       if g.checked
-        game = g
+        gameTitle = g.value
 
-    game.setAttribute 'players', 2
-    game.setAttribute 'active', ''
-    game.addEventListener 'finish', @onFinish
+    @gameGroup.setAttribute 'state', gameTitle + ',' + '2'
 
     $('#myModal').modal 'hide'
     @changeState State.PLAYING

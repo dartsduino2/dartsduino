@@ -71,7 +71,7 @@ Polymer 'game-base',
     console.log point + ' * ' + ratio + ' = ' + point * ratio
 
   finish: (result) ->
-    console.log 'Finish!'
+    # console.log 'Finish!'
 
     @removeEventListener()
 
