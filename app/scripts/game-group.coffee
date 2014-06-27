@@ -2,6 +2,8 @@
 
 Polymer 'game-group',
 
+  activeGame: null
+
   publish:
     games:
       value: ''
@@ -18,14 +20,18 @@ Polymer 'game-group',
     @games = games.join ','
 
   stateChanged: (oldValue, newValue) ->
-    [title, players] = newValue.split ','
+    if newValue?
+      [title, players] = newValue.split ','
+      @activateGame title, players
+    else
+      @deactivateGame()
 
+  activateGame: (title, players) ->
     index = @games.split(',').indexOf title
-    game = @.$.games.children[index]
+    @activeGame = @.$.games.children[index]
 
-    game.setAttribute 'players', players
-    game.setAttribute 'active', ''
-    game.addEventListener 'finish', @onFinish
+    @activeGame.setAttribute 'players', players
+    @activeGame.setAttribute 'active', ''
 
-  onFinish: ->
-    console.log 'Finished'
+  deactivateGame: ->
+    @activeGame.removeAttribute 'active'

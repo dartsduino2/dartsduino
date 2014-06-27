@@ -17,6 +17,9 @@ class Game
     $('#select-button').click @select
     $('#cancel-button').click @cancel
 
+    game = document.querySelector 'game-group'
+    game.addEventListener 'finish', @onFinish
+
   resizeWindow: ->
     bodyHeight = $('body').height()
     headerHeight = $('.header').height() + 11
