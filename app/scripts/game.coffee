@@ -7,6 +7,7 @@ class Game
     PLAYING: 1
 
   state: State.NOT_STARTED
+  gameGroup: null
 
   constructor: ->
     @resizeWindow()
@@ -16,9 +17,10 @@ class Game
     $('#start-button').click @start
     $('#select-button').click @select
     $('#cancel-button').click @cancel
+    $('#result-ok').click @initialize
 
-    game = document.querySelector 'game-group'
-    game.addEventListener 'finish', @onFinish
+    @gameGroup = document.querySelector 'game-group'
+    @gameGroup.addEventListener 'finish', @onFinish
 
   resizeWindow: ->
     bodyHeight = $('body').height()
@@ -33,9 +35,11 @@ class Game
       .attr 'height', length
       .css 'margin-left', marginLeft
 
+  initialize: =>
+    @gameGroup.removeAttribute 'state'
+
   start: =>
-    gameGroup = document.querySelector 'game-group'
-    games = (gameGroup.getAttribute 'games').split ','
+    games = (@gameGroup.getAttribute 'games').split ','
 
     gameItems = $('#gameItems')
     gameItems.empty()
@@ -54,8 +58,7 @@ class Game
       if g.checked
         gameTitle = g.value
 
-    gameGroup = document.querySelector 'game-group'
-    gameGroup.setAttribute 'state', gameTitle + ',' + '2'
+    @gameGroup.setAttribute 'state', gameTitle + ',' + '2'
 
     $('#myModal').modal 'hide'
     @changeState State.PLAYING
