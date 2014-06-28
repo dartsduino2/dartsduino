@@ -1,0 +1,51 @@
+<polymer-element name="game-cricket" extends="game-base">
+  <template>
+    <link rel="stylesheet" href="../styles/game-cricket.css">
+
+    <span class="title">
+      {{title}}
+    </span>
+
+    <table class="score table table-bordered table-striped">
+      <tr>
+        <th class="{{ {focus: currentPlayer.id == 0} | tokenList }}">
+          {{playerList[0].name}}
+        </th>
+        <th>
+          Round {{round}}
+        </th>
+        <th class="{{ {focus: currentPlayer.id == 1} | tokenList }}">
+          {{playerList[1].name}}
+        </th>
+      </tr>
+
+      <template repeat="{{p in POINTS}}">
+        <tr class="{{ {closed: closedPoint[p]} | tokenList }}">
+          <td>
+            <div>
+              <template repeat="{{c in MARKS[scores[0][p]]}}">
+                <span>{{c}}</span>
+              </template>
+            </div>
+          </td>
+          <td>{{p}}</td>
+          <td>
+            <div>
+              <template repeat="{{c in MARKS[scores[1][p]]}}">
+                <span>{{c}}</span>
+              </template>
+            </div>
+          </td>
+        </tr>
+      </template>
+
+      <tr>
+        <td>{{totalScores[0]}}</td>
+        <td>スコア</td>
+        <td>{{totalScores[1]}}</td>
+      </tr>
+    </table>
+  </template>
+
+  <script src="../scripts/game-cricket.js"></script>
+</polymer-element>

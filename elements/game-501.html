@@ -1,0 +1,41 @@
+<!-- <link rel="import" href="../../bower_components/polymer/polymer.html"> -->
+
+<polymer-element name="game-501" extends="game-base">
+  <template>
+    <link rel="stylesheet" href="../styles/game-501.css">
+
+    <span class="title">
+      {{title}}
+    </span>
+
+    <table class="score table table-bordered table-striped col-md-6">
+      <caption></caption>
+      <tr>
+        <th></th>
+        <template repeat="{{p, i in playerList}}">
+          <th class="{{ {focus: currentPlayer.id == i} | tokenList }}">
+            {{p.name}}
+          </th>
+        </template>
+      </tr>
+
+      <template repeat="{{ss, r in scores[0]}}">
+        <tr>
+          <td>{{r+1}}</td>
+          <template repeat="{{p, i in playerList}}">
+            <td>{{scores[i][r]}}</td>
+          </template>
+        </tr>
+      </template>
+
+      <tr>
+        <td>スコア</td>
+        <template repeat="{{p, i in playerList}}">
+          <td>{{totalScores[i]}}</td>
+        </template>
+      </tr>
+    </table>
+  </template>
+
+  <script src="../scripts/game-501.js"></script>
+</polymer-element>
