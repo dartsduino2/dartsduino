@@ -8,6 +8,9 @@ Polymer 'game-time-attack',
   timer: null
   count: null
 
+  preTimer: null
+  preCount: null
+
   initialize: ->
     @title = 'タイムアタック'
 
@@ -15,11 +18,23 @@ Polymer 'game-time-attack',
     @score = 0
     @count = @MAX_COUNT
 
+    @preCount = 3
+    @preTimer = setInterval =>
+      @preCount--
+
+      if @preCount is 0
+        clearInterval @preTimer
+        @preTimer = null
+
+        @doStart()
+    , 1000
+
+  doStart: ->
     @timer = setInterval =>
+      @count--
+
       if @count is 0
         @over()
-      else
-        @count--
     , 1000
 
   onHit: (event) ->
