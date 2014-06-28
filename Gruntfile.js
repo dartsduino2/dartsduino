@@ -295,7 +295,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= config.dist %>',
-          src: '{,*/}*.html',
+          src: '*.html',
           dest: '<%= config.dist %>'
         }]
       }
@@ -347,6 +347,24 @@ module.exports = function (grunt) {
           dot: true,
           cwd: '.',
           src: 'bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/*',
+          dest: '<%= config.dist %>'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '.',
+          src: [
+            'bower_components/platform/platform.js',
+            'bower_components/darts-ui/dist/darts-ui.html'
+          ],
+          dest: '<%= config.dist %>'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '.tmp',
+          src: [
+            'scripts/game-*.js',
+            'styles/game-*.css'
+          ],
           dest: '<%= config.dist %>'
         }]
       },
@@ -429,7 +447,7 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'copy:dist',
-    'rev',
+    // 'rev',
     'usemin',
     'htmlmin'
   ]);

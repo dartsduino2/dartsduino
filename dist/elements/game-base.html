@@ -1,0 +1,21 @@
+<polymer-element name="game-base" attributes="active players">
+  <template>
+    <link rel="stylesheet" href="../styles/game-base.css">
+
+    <span class="title">
+      {{title}}
+    </span>
+
+    <div>
+      Round : {{round}}
+    </div>
+    <div>
+      Count : {{count}}
+    </div>
+    <div>
+      Score : {{totalScore}}
+    </div>
+  </template>
+
+  <script src="../scripts/game-base.js"></script>
+</polymer-element>
