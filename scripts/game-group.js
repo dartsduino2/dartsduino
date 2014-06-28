@@ -20,7 +20,8 @@
         game = _ref[_i];
         games.push(game.getAttribute('title'));
       }
-      return this.games = games.join(',');
+      this.games = games.join(',');
+      return this.activateGame('タイムアタック');
     },
     stateChanged: function(oldValue, newValue) {
       var players, title, _ref;
