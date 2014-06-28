@@ -3,10 +3,6 @@
 
 $font-size: 300px;
 
-#count {
-  font-size: 24px;
-}
-
 #precount {
   font-size: $font-size;
   color: #fe5;
@@ -23,5 +19,19 @@ $font-size: 300px;
     transition: transform 900ms ease, opacity 900ms ease-in;
     transform: translate(-50%,-50%) scale(0.3);
     opacity: 0;
+  }
+}
+
+#score {
+  font-size: 32px;
+
+  position: absolute;
+  top: 80px;
+  left: 13%;
+
+  width: 20%;
+
+  .alert {
+    color: red;
   }
 }

@@ -43,7 +43,9 @@ Polymer 'game-time-attack',
     @timer = setInterval =>
       @count--
 
-      if @count is 0
+      if @count is 3
+        @.$.count.classList.add 'alert'
+      else if @count is 0
         @over()
     , 1000
 

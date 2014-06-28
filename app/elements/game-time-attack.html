@@ -6,11 +6,17 @@
       {{title}}
     </span>
 
-    <div id="count">
-      {{count}}
-    </div>
-    <div>
-      {{score}}
+    <div id="score">
+      <table class="score table table-bordered col-md-6">
+        <tr>
+          <td>残り時間</td>
+          <td id="count" style="text-align: right">{{count}}</td>
+        </tr>
+        <tr>
+          <td>スコア</td>
+          <td style="text-align: right">{{score}}</td>
+        </tr>
+      </table>
     </div>
 
     <div id="precount">
