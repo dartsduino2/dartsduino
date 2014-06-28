@@ -18,10 +18,12 @@ Polymer 'game-time-attack',
   start: ->
     @score = 0
     @count = @MAX_COUNT
+    @tick()
 
     @preCount = @MAX_PRECOUNT
     @preTimer = setInterval =>
       @preCount--
+      @tick()
 
       if @preCount is 0
         @preCount = ''
@@ -30,6 +32,12 @@ Polymer 'game-time-attack',
 
         @doStart()
     , 1000
+
+  tick: ->
+    @.$.precount.classList.remove 'tick'
+    setTimeout =>
+      @.$.precount.classList.add 'tick'
+    , 100
 
   doStart: ->
     @timer = setInterval =>

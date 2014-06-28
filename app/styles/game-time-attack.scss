@@ -15,5 +15,13 @@ $font-size: 300px;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+
+  transform: translate(-50%,-50%) scale(1);
+  opacity: 1;
+
+  &.tick {
+    transition: transform 900ms ease, opacity 900ms ease-in;
+    transform: translate(-50%,-50%) scale(0.3);
+    opacity: 0;
+  }
 }
