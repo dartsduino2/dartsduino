@@ -19,6 +19,9 @@ Polymer 'game-group',
 
     @games = games.join ','
 
+    # console.log @games
+    @activateGame 'タイムアタック'
+
   stateChanged: (oldValue, newValue) ->
     if newValue?
       [title, players] = newValue.split ','
