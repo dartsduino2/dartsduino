@@ -23,8 +23,15 @@ Polymer 'game-time-attack',
     , 1000
 
   onHit: (event) ->
+    if @timer is null
+      return
+
+    point = parseInt event.detail.point
+    ratio = parseInt event.detail.ratio
+    @score += point * ratio
 
   over: ->
     # console.log 'over'
 
     clearInterval @timer
+    @timer = null
