@@ -3,6 +3,7 @@
 Polymer 'game-time-attack',
 
   MAX_COUNT: 30
+  MAX_PRECOUNT: 3
 
   score: null
   timer: null
@@ -18,11 +19,12 @@ Polymer 'game-time-attack',
     @score = 0
     @count = @MAX_COUNT
 
-    @preCount = 3
+    @preCount = @MAX_PRECOUNT
     @preTimer = setInterval =>
       @preCount--
 
       if @preCount is 0
+        @preCount = ''
         clearInterval @preTimer
         @preTimer = null
 

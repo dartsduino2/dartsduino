@@ -1,2 +1,19 @@
 
 @import "game-base.scss";
+
+$font-size: 300px;
+
+#count {
+  font-size: 24px;
+}
+
+#precount {
+  font-size: $font-size;
+  color: #fe5;
+  text-shadow: 4px 4px 3px #000;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
