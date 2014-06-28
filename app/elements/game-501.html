@@ -23,7 +23,7 @@
         <tr>
           <td>{{r+1}}</td>
           <template repeat="{{p, i in playerList}}">
-            <th>{{scores[i][r]}}</th>
+            <td>{{scores[i][r]}}</td>
           </template>
         </tr>
       </template>
@@ -31,7 +31,7 @@
       <tr>
         <td>スコア</td>
         <template repeat="{{p, i in playerList}}">
-          <th>{{totalScores[i]}}</th>
+          <td>{{totalScores[i]}}</td>
         </template>
       </tr>
     </table>
