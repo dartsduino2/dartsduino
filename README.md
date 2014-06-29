@@ -14,32 +14,32 @@ dartsduino
 
 ## 技術的なアピールポイント
 
-![構成図](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino.png)
+![構成図](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.png)
 
-* dartsduino-sketch
+* [dartsduino-sketch](https://github.com/dartsduino2/dartsduino-sketch)
   * 市販のダーツボードに元々実装されているマイコンを Arduino に置き換え、ダーツがボードに当たった際に所望のデータを PC へ送信できるよう改造しました。
   * Arduino 上で動かすコード (sketch) は、ダーツの各セルに配置されているセンサを走査し、ダーツがボードに当たったことを検出します。
     コードを実装した当初は走査のサイクルが 1.8ms 間隔で、ダーツがボードに当たったことを正しく検出できる確率は 10％程度でした。
     そこで、アセンブリ言語レベルでコードをチューニングし、走査間隔を 0.18ms まで短くすることで、正しく検出できる確率を 100％にすることができました。
-* dartsduino-chromeapp
+* [dartsduino-device](https://github.com/dartsduino2/dartsduino-device)
   * ダーツボードから送信されたデータは、PC ではシリアルからのデータとして受信できます。このデータを受信するアプリは Chrome app として実装しました。
-  * Chrome app が受信したデータは、PeerJS を用いた WebRTC により、PeerJS server へ送られます。
+  * dartsduino-device が受信したデータは、PeerJS を用いた WebRTC により、PeerJS server へ送られます。
     今回はローカルマシンの PeerJS server へデータを送っていますが、NTTコミュニケーションズさんの SkyWay などを利用することで、
     他のマシンへデータをリアルタイムに送信することができ、たとえば遠隔地の人と対戦することも実現可能になります。
-* dartsduino-core
-  * ダーツゲームのコア部分です。以下の darts-ui と dartsduino-games を包含しています。
-* darts-ui
+* [dartsduino](https://github.com/dartsduino2/dartsduino)
+  * ダーツゲームのコア部分です。以下の darts-ui と game-group を包含しています。
+* [darts-ui](https://github.com/dartsduino2/darts-ui)
   * ダーツボードを表現する UI 部品です。Polymer を利用して、再利用可能なモジュール (Web Components) として実装しました。
   * ダーツがダーツボードに当たったことと、当たった位置は、PeerJS server から送らるデータによって検出することができます。
     また、主にデバッグ用途として、ブラウザ上に表示されるダーツボードをクリックすることで、ダーツが当たったことをシミュレートすることができます。
-* dartsduino-games
+* game-group と各種ゲーム (game-time-attack など)
   * 各種ダーツゲームは Polymer を利用してモジュール化し、各ゲーム固有のルールやスコア計算のアルゴリズム、スコア表示 UI 部品などをカプセル化しました。
   * ゲームのステータス管理や表示/非表示の切り替えといったゲーム共通の機能は、game-base と呼ぶ Web Component に実装し、各ゲームはこの game-base を継承する設計としました。
 
 
 ## 企画上のアピールポイント
 
-元々の発端は、Mozilla さんが Mecha-Mozilla (http://mecha-mozilla.org/) にて掲げている「ウェブと実世界のいい感じの関係性」に強い刺激を受けたことに始まりました。
+元々の発端は、Mozilla さんが [Mecha-Mozilla](http://mecha-mozilla.org/) にて掲げている「ウェブと実世界のいい感じの関係性」に強い刺激を受けたことに始まりました。
 
 その後、気づいたことのひとつが「Web の進化のスピードについてきていない実世界」でした。
 たとえば市販のダーツボードは、プリセットされたゲームがマイコン内に実装されていて、ユーザが購入後にゲームを独自に改造、または新規のゲームを追加することができません。
