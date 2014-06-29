@@ -2,7 +2,7 @@
 
 dartsduino
 
-[screenshot](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.gif)
+![screenshot](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.gif)
 
 
 ## 作品の概要
@@ -18,7 +18,7 @@ dartsduino
 
 本作品は、以下の図のように、複数の要素によって構成されています。
 
-[構成図](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.png)
+![構成図](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.png)
 
 * [dartsduino-sketch](https://github.com/dartsduino2/dartsduino-sketch)
   * 市販のダーツボードに元々実装されているマイコンを [Arduino Nano](http://arduino.cc/en/Main/arduinoBoardNano) に置き換え、
