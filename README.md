@@ -2,15 +2,15 @@
 
 dartsduino
 
-![screenshot](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.gif)
+[screenshot](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.gif)
 
 
 ## 作品の概要
 
-改造した市販のダーツボードを PC と USB ケーブルで接続し、様々な種類のダーツゲームを楽しむことができます。
+市販のダーツボードを改造して Arduino を搭載し、USB ケーブルで接続した PC から、様々な種類のダーツゲームを楽しむことができます。
 また、開発者にとっては、新たなダーツゲームを Web Components として実装し、容易に組み込むことができるように設計しています。
 
-この作品では、IoT が広く用いられ、Web と実世界が結びつく将来を見据え、Web と実世界それぞれの長所を兼ね備えた新しい可能性を模索することを目指しました。
+この作品では、IoT が広く用いられ、Web と実世界が結びつく次代を見据え、Web と実世界それぞれの長所を兼ね備えた新しい可能性を模索することを目指しました。
 新しい可能性を模索する切り口のひとつとして、今回はダーツを題材としています。
 
 
@@ -18,20 +18,20 @@ dartsduino
 
 本作品は、以下の図のように、複数の要素によって構成されています。
 
-![構成図](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.png)
+[構成図](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.png)
 
 * [dartsduino-sketch](https://github.com/dartsduino2/dartsduino-sketch)
-  * 市販のダーツボードに元々実装されているマイコンを [Arduino Micro](http://arduino.cc/en/Main/arduinoBoardMicro) に置き換え、
+  * 市販のダーツボードに元々実装されているマイコンを [Arduino Nano](http://arduino.cc/en/Main/arduinoBoardNano) に置き換え、
     ダーツがボードに当たった際に所望のデータを PC へ送信できるよう改造しました。
     * ダーツボードは、1500円程度の安い製品から 2万円弱の比較的高価な製品まで、3種類の製品を使って試しました。
       ダーツがダーツボードに当たったことを検知する原理や、電子回路の全体構成など、基本的な作りは 3種類とも共通していました。
   * Arduino 上で動かすコード (sketch) は、ダーツの各セルに配置されているセンサを走査し、ダーツがボードに当たったことを検出します。
-    * ダーツが当たったことを検知し損なわないためには、センサを高速に走査することが必要です。
+    * ダーツが当たったことを検知し損ねないためには、センサを高速に走査することが必要です。
     * コードを実装した当初、ダーツがボードに当たったことを確実に検出できませんでした (検出率 10％程度)。
       このとき、すべてのセンサの走査 1回に要する時間は 1.8ms でした。
       その後、アセンブリ言語レベルでコードを最適化し、走査に要する時間を 0.18ms まで短くすることで、確実に検出できるようになりました。
   * 参考サイト
-    * [Arduino Micro](http://arduino.cc/en/Main/arduinoBoardMicro)
+    * [Arduino Nano](http://arduino.cc/en/Main/arduinoBoardNano)
     * [Arduinoで遊ぶページ](http://garretlab.web.fc2.com/arduino/inside/index.html)
 * [dartsduino-device](https://github.com/dartsduino2/dartsduino-device)
   * dartsduino-sketch から送信されたデータは、PC ではシリアルからのデータとして受信できます。
@@ -55,9 +55,12 @@ dartsduino
 * [darts-ui](https://github.com/dartsduino2/darts-ui)
   * ダーツボードを表現する UI 部品です。
     [Polymer](http://www.polymer-project.org/) を利用して、再利用可能なモジュール (Web Components) として実装しました。
+    * [AngularJS](https://angularjs.org/) の [directive](https://docs.angularjs.org/guide/directive) を利用して UI 部品を実装すると、
+      AngularJS に依存し、[Backbone.js](http://backbonejs.org/) など他の MV\* framework を利用した web app にて再利用することが難しくなります。
+      Web Components として実装することで、MV\* framework の種類によらず再利用可能となります。
   * ダーツボードの表示は [Snap.svg](http://snapsvg.io/) を用いて SVG によって描画しています。
-    canvas ではなく SVG を用いたことで、スケーラブルな描画を実現できただけでなく、
-    クリックした際のイベントハンドラを容易に実装でき、ハイライトなどの表現を CSS を用いてシンプルに実装することができました。
+    * canvas ではなく SVG を用いたことで、スケーラブルな描画を実現できただけでなく、
+      クリックした際のイベントハンドラを容易に実装でき、ハイライトなどの表現を CSS を用いてシンプルに実装することができました。
   * darts-ui の初期化後、ローカルマシンの PeerJS server へ接続し、待機中の dartsduino-device と P2P 接続します。
     ダーツがダーツボードに当たったこととその位置は、dartsduino-device より送られるデータによって検知します。
   * また、主にデバッグ用途として、ブラウザ上に表示されたダーツボードをクリックすることで、ダーツが当たったことをシミュレートできます。
@@ -66,10 +69,15 @@ dartsduino
     * [Polymer](http://www.polymer-project.org/)
     * [Snap.svg](http://snapsvg.io/)
 * game-group と各種ゲーム (game-time-attack など)
+  * Web Components は、ボタンなどの UI 部品を実装するといった文脈で語られることが多いですが、
+    UI 部品の集合体である View や、表示する要素を一切持たない機能のみのモジュールなど、
+    様々なケースにおいて適用可能です。
+    こういった Web Components の特長に強い感銘を受け、本作品では各種ゲームの実装に Polymer を用いるなど、Web Components を多用しています。
   * game-group は、各ゲームのモジュールを子要素として持ち、管理します。
   * 各ゲームは Polymer を利用してモジュール化し、ゲームそれぞれ固有のルールやスコア計算のアルゴリズム、スコアを表示する UI 部品などをカプセル化しました。
   * ゲームのステータス管理や表示/非表示の切り替えといったゲーム共通の機能は、game-base と呼ぶ Web Component に実装し、
     各ゲームはこの game-base を継承することで効率的に実装できる設計としました。
+    * この設計には、Web Components が他の Web Components を継承できる Polymer の機能が非常に役立っています。
   * 参考サイト
     * Polymer
       * [Extending other elements](http://www.polymer-project.org/docs/polymer/polymer.html#extending-other-elements)
