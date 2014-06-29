@@ -86,13 +86,15 @@ class Game
         $('#cancel-button').show()
 
   onFinish: (result) =>
-    player = result.detail.player
-    if player is null
-      winner = '引き分け'
+    if result.detail.message?
+      message = result.detail.message
     else
-      winner = "#{player.name} の勝ち!"
+      if result.detail.player?
+        message = '引き分け'
+      else
+        message = "#{result.detail.player.name} の勝ち!"
 
-    $('#winner').text winner
+    $('#message').text message
 
     $('#resultModal').modal 'show'
 
