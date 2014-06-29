@@ -69,15 +69,15 @@ dartsduino
     * [Polymer](http://www.polymer-project.org/)
     * [Snap.svg](http://snapsvg.io/)
 * game-group と各種ゲーム (game-time-attack など)
-  * Web Components は、ボタンなどの UI 部品を実装するといった文脈で語られることが多いですが、
-    UI 部品の集合体である View や、表示する要素を一切持たない機能のみのモジュールなど、
-    様々なケースにおいて適用可能です。
-    こういった Web Components の特長に強い感銘を受け、本作品では各種ゲームの実装に Polymer を用いるなど、Web Components を多用しています。
   * game-group は、各ゲームのモジュールを子要素として持ち、管理します。
-  * 各ゲームは Polymer を利用してモジュール化し、ゲームそれぞれ固有のルールやスコア計算のアルゴリズム、スコアを表示する UI 部品などをカプセル化しました。
-  * ゲームのステータス管理や表示/非表示の切り替えといったゲーム共通の機能は、game-base と呼ぶ Web Component に実装し、
-    各ゲームはこの game-base を継承することで効率的に実装できる設計としました。
-    * この設計には、Web Components が他の Web Components を継承できる Polymer の機能が非常に役立っています。
+  * 各ゲームは Polymer を用いて Web Components としてモジュール化し、ゲームそれぞれ固有のルールやスコア計算のアルゴリズム、スコアを表示する UI 部品などをカプセル化しました。
+    * Web Components は、ボタンなどの UI 部品を実装するといった文脈で語られることが多いですが、
+      UI 部品の集合体である View や、表示する要素を一切持たない機能のみのモジュールなど、
+      様々なケースにおいて適用可能です。
+      こういった Web Components の特長に強い感銘を受け、本作品では各種ゲームの実装に Polymer を用いるなど、Web Components を多用しています。
+    * ゲームのステータス管理や表示/非表示の切り替えといったゲーム共通の機能は、game-base と呼ぶ Web Component に実装し、
+      各ゲームはこの game-base を継承することで効率的に実装できる設計としました。
+      この設計には、Web Components が他の Web Components を継承できる Polymer の機能が非常に役立っています。
   * 参考サイト
     * Polymer
       * [Extending other elements](http://www.polymer-project.org/docs/polymer/polymer.html#extending-other-elements)
