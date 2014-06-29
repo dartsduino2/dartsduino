@@ -16,6 +16,8 @@ dartsduino
 
 ## 技術的なアピールポイント
 
+本作品は、以下の図のように、複数のモジュールによって構成されています。
+
 ![構成図](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino2.png)
 
 * [dartsduino-sketch](https://github.com/dartsduino2/dartsduino-sketch)
@@ -25,7 +27,8 @@ dartsduino
       ダーツがダーツボードに当たったことを検知する原理や、電子回路の全体構成など、基本的な作りは 3種類とも共通していました。
   * Arduino 上で動かすコード (sketch) は、ダーツの各セルに配置されているセンサを走査し、ダーツがボードに当たったことを検出します。
     * ダーツが当たったことを検知し損なわないためには、センサを高速に走査することが必要です。
-    * コードを実装した当初、すべてのセンサの走査 1回に要する時間は 1.8ms で、ダーツがボードに当たったことを確実に検出できませんでした (検出率 10％程度)。
+    * コードを実装した当初、ダーツがボードに当たったことを確実に検出できませんでした (検出率 10％程度)。
+      このとき、すべてのセンサの走査 1回に要する時間は 1.8ms でした。
       その後、アセンブリ言語レベルでコードを最適化し、走査に要する時間を 0.18ms まで短くすることで、確実に検出できるようになりました。
   * 参考サイト
     * [Arduino Micro](http://arduino.cc/en/Main/arduinoBoardMicro)
@@ -39,9 +42,9 @@ dartsduino
     ローカルマシンに立ち上げた [PeerJS server](https://github.com/peers/peerjs-server)
     へ接続し、他プロセスからの接続を待ちます。
   * 他プロセスから接続された後は、dartsduino-sketch より受信したデータを、
-    PeerJS を用いた WebRTC により他プロセスへ送ります。
+    PeerJS を用いた WebRTC により他プロセスへ送信します。
   * 今回はローカルマシンの PeerJS server へ接続していますが、
-    将来的には、NTTコミュニケーションズさんの [SkyWay](http://nttcom.github.io/skyway/) などを利用することで、
+    将来的には、NTTコミュニケーションズさんの [SkyWay](http://nttcom.github.io/skyway/) など外部のサービスを利用することで、
     他のマシンへデータをリアルタイムに送信することができ、たとえば遠隔地の人と対戦することも実現可能になります。
   * 参考サイト
     * [HTML5 Chrome Packaged Apps and Arduino: bidirectional communication via serial](http://www.fabiobiondi.com/blog/2014/02/html5-chrome-packaged-apps-and-arduino-bidirectional-communication-via-serial/)
@@ -63,9 +66,10 @@ dartsduino
     * [Polymer](http://www.polymer-project.org/)
     * [Snap.svg](http://snapsvg.io/)
 * game-group と各種ゲーム (game-time-attack など)
-  * 各種ダーツゲームは Polymer を利用してモジュール化し、各ゲーム固有のルールやスコア計算のアルゴリズム、スコアを表示する UI 部品などをカプセル化しました。
+  * game-group は、各ゲームのモジュールを子要素として持ち、管理します。
+  * 各ゲームは Polymer を利用してモジュール化し、ゲームそれぞれ固有のルールやスコア計算のアルゴリズム、スコアを表示する UI 部品などをカプセル化しました。
   * ゲームのステータス管理や表示/非表示の切り替えといったゲーム共通の機能は、game-base と呼ぶ Web Component に実装し、
-    各ゲームはこの game-base を継承して効率的に実装できる設計としました。
+    各ゲームはこの game-base を継承することで効率的に実装できる設計としました。
   * 参考サイト
     * Polymer
       * [Extending other elements](http://www.polymer-project.org/docs/polymer/polymer.html#extending-other-elements)
