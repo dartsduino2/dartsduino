@@ -15,7 +15,7 @@ Polymer 'game-group',
   domReady: ->
     games = []
     for game in @.$.games.children
-      games.push game.getAttribute 'title'
+      games.push game.title
 
     @games = games.join ','
 
