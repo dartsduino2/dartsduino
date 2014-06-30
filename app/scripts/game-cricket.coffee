@@ -14,7 +14,7 @@ Polymer 'game-cricket',
   count: null
 
   initialize: ->
-    @title = 'Cricket'
+    @title = 'クリケット'
 
   start: ->
     @totalScores = {}
