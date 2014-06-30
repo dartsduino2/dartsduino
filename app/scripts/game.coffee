@@ -18,7 +18,6 @@ class Game
     $('#start-button').click @start
     $('#select-button').click @select
     $('#cancel-button').click @cancel
-    $('#result-ok').click @initialize
 
     @dartsUi = document.querySelector 'darts-ui'
 
@@ -38,12 +37,9 @@ class Game
       .attr 'height', length
       .css 'margin-left', marginLeft
 
-  initialize: =>
-    @dartsUi.setAttribute 'focuses', ' '
-    @gameGroup.removeAttribute 'state'
-
   start: =>
     @dartsUi.setAttribute 'focuses', ' '
+    @gameGroup.removeAttribute 'state'
 
     games = (@gameGroup.getAttribute 'games').split ','
 
