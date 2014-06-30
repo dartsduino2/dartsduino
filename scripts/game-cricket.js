@@ -11,10 +11,10 @@
     round: null,
     count: null,
     initialize: function() {
-      return this.title = 'Cricket';
+      return this.title = 'クリケット';
     },
     start: function() {
-      var player, point, _i, _j, _len, _len1, _ref, _ref1;
+      var closedPoint, player, point, _i, _j, _len, _len1, _ref, _ref1;
       this.totalScores = {};
       this.scores = {};
       _ref = this.playerList;
@@ -28,6 +28,7 @@
           this.scores[player.id][point] = 0;
         }
       }
+      closedPoint = {};
       this.round = 1;
       return this.count = 1;
     },
