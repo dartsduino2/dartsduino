@@ -66,6 +66,8 @@ class Game
     @changeState State.PLAYING
 
   cancel: =>
+    @gameGroup.removeAttribute 'state'
+
     @changeState State.NOT_STARTED
 
   changeState: (state) =>
@@ -82,6 +84,9 @@ class Game
         $('#cancel-button').show()
 
   onFinish: (result) =>
+    if @state isnt State.PLAYING
+      return
+
     if result.detail.message?
       message = result.detail.message
     else
