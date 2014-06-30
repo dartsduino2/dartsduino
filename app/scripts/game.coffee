@@ -10,6 +10,8 @@ class Game
   dartsUi: null
   gameGroup: null
 
+  sound: null
+
   constructor: ->
     @resizeWindow()
     $(window).resize =>
@@ -20,9 +22,20 @@ class Game
     $('#cancel-button').click @cancel
 
     @dartsUi = document.querySelector 'darts-ui'
+    @dartsUi.addEventListener 'hit', @onHit
 
     @gameGroup = document.querySelector 'game-group'
     @gameGroup.addEventListener 'finish', @onFinish
+
+    @sound = new Sound()
+
+  onHit: =>
+    {point, ratio} = event.detail
+
+    if point is '25'
+      @sound.play 'bull', parseInt(ratio)
+    else
+      @sound.play '1', parseInt(ratio)
 
   resizeWindow: ->
     bodyHeight = $('body').height()
