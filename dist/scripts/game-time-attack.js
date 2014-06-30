@@ -60,7 +60,10 @@
     },
     over: function() {
       clearInterval(this.timer);
-      return this.timer = null;
+      this.timer = null;
+      return this.finish({
+        message: "スコア: " + this.score
+      });
     }
   });
 
