@@ -90,9 +90,9 @@ class Game
       message = result.detail.message
     else
       if result.detail.player?
-        message = '引き分け'
-      else
         message = "#{result.detail.player.name} の勝ち!"
+      else
+        message = '引き分け'
 
     $('#message').text message
 

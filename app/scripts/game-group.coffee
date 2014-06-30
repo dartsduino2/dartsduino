@@ -20,7 +20,7 @@ Polymer 'game-group',
     @games = games.join ','
 
     # console.log @games
-    @activateGame 'タイムアタック'
+    # @activateGame 'タイムアタック'
 
   stateChanged: (oldValue, newValue) ->
     if newValue?
