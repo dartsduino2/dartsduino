@@ -49,6 +49,16 @@
         };
       })(this), 1000);
     },
+    stop: function() {
+      if (this.preTimer != null) {
+        clearInterval(this.preTimer);
+        this.preTimer = null;
+      }
+      if (this.timer) {
+        clearInterval(this.timer);
+        return this.timer = null;
+      }
+    },
     onHit: function(event) {
       var point, ratio;
       if (this.timer === null) {

@@ -50,6 +50,9 @@
     },
     deactivate: function() {
       this.removeEventListener();
+      if (typeof this.stop === "function") {
+        this.stop();
+      }
       this.state = this.State.NOT_STARTED;
       return this.setVisibility(false);
     },
