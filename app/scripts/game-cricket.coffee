@@ -14,7 +14,7 @@ Polymer 'game-cricket',
   count: null
 
   initialize: ->
-    @title = 'Cricket'
+    @title = 'クリケット'
 
   start: ->
     @totalScores = {}
@@ -25,6 +25,8 @@ Polymer 'game-cricket',
       @scores[player.id] = {}
       for point in @POINTS
         @scores[player.id][point] = 0
+
+    closedPoint = {}
 
     @round = 1
     @count = 1

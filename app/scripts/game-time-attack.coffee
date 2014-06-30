@@ -62,3 +62,6 @@ Polymer 'game-time-attack',
 
     clearInterval @timer
     @timer = null
+
+    @finish
+      message: "スコア: #{@score}"

@@ -2,7 +2,7 @@
 
 Polymer 'game-501',
 
-  MAX_ROUND: 1
+  MAX_ROUND: 8
 
   totalScores: null
   scores: null

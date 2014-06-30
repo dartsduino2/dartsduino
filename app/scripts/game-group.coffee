@@ -15,12 +15,12 @@ Polymer 'game-group',
   domReady: ->
     games = []
     for game in @.$.games.children
-      games.push game.getAttribute 'title'
+      games.push game.title
 
     @games = games.join ','
 
     # console.log @games
-    @activateGame 'タイムアタック'
+    # @activateGame 'タイムアタック'
 
   stateChanged: (oldValue, newValue) ->
     if newValue?

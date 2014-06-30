@@ -18,7 +18,6 @@ class Game
     $('#start-button').click @start
     $('#select-button').click @select
     $('#cancel-button').click @cancel
-    $('#result-ok').click @initialize
 
     @dartsUi = document.querySelector 'darts-ui'
 
@@ -38,12 +37,9 @@ class Game
       .attr 'height', length
       .css 'margin-left', marginLeft
 
-  initialize: =>
-    @dartsUi.setAttribute 'focuses', ' '
-    @gameGroup.removeAttribute 'state'
-
   start: =>
     @dartsUi.setAttribute 'focuses', ' '
+    @gameGroup.removeAttribute 'state'
 
     games = (@gameGroup.getAttribute 'games').split ','
 
@@ -70,6 +66,8 @@ class Game
     @changeState State.PLAYING
 
   cancel: =>
+    @gameGroup.removeAttribute 'state'
+
     @changeState State.NOT_STARTED
 
   changeState: (state) =>
@@ -86,13 +84,18 @@ class Game
         $('#cancel-button').show()
 
   onFinish: (result) =>
-    player = result.detail.player
-    if player is null
-      winner = '引き分け'
-    else
-      winner = "#{player.name} の勝ち!"
+    if @state isnt State.PLAYING
+      return
 
-    $('#winner').text winner
+    if result.detail.message?
+      message = result.detail.message
+    else
+      if result.detail.player?
+        message = "#{result.detail.player.name} の勝ち!"
+      else
+        message = '引き分け'
+
+    $('#message').text message
 
     $('#resultModal').modal 'show'
 
