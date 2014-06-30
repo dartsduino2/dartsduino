@@ -54,6 +54,8 @@ Polymer 'game-base',
   deactivate: ->
     @removeEventListener()
 
+    @stop?()
+
     @state = @State.NOT_STARTED
 
     @setVisibility false

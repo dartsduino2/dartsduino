@@ -49,6 +49,15 @@ Polymer 'game-time-attack',
         @over()
     , 1000
 
+  stop: ->
+    if @preTimer?
+      clearInterval @preTimer
+      @preTimer = null
+
+    if @timer
+      clearInterval @timer
+      @timer = null
+
   onHit: (event) ->
     if @timer is null
       return
