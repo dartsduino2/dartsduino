@@ -4,7 +4,7 @@ Polymer 'game-cricket',
 
   POINTS: [20, 19, 18, 17, 16, 15, 'Bull']
   MARKS: [[''], ['／'], ['／', '＼'], ['／', '＼', '◯']]
-  MAX_ROUND: 8
+  MAX_ROUND: 20
   MAX_SCORE: 3
 
   totalScores: {}
