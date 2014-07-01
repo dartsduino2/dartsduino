@@ -97,7 +97,7 @@ dartsduino
 ## 今後の予定
 
 * 他の人も市販のダーツボードを改造できるよう、改造方法を GitHub か [gitFAB](http://gitfab.org/) にて公開
-  * ちなみに回路は、下図のように、Arduino Nano にプルダウン抵抗をつなげただけの非常に簡素な回路です。
+  * ちなみに回路は、Arduino Nano にプルダウン抵抗をつなげただけの非常に簡素な回路です。
     ![dartsduino-hw](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino-hw.png)
 * game-base や各ゲームのリファクタリング
   * Web Components の素晴らしさに気づいたタイミングが応募締め切りの 10日ほど前で、まずは本作品が動作することを優先したため、
