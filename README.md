@@ -7,7 +7,7 @@ dartsduino
 
 ## 作品の概要
 
-市販のダーツボードを改造して Arduino を搭載し、USB ケーブルで接続した PC から、様々な種類のダーツゲームを楽しむことができます。
+改造して Arduino を搭載した市販のダーツボードと、USB ケーブルで接続した PC を用いて、様々な種類のダーツゲームを楽しむことができます。
 また、開発者にとっては、新たなダーツゲームを Web Components として実装し、容易に組み込むことができるように設計しています。
 
 この作品では、IoT が広く用いられ、Web と実世界が結びつく次代を見据え、Web と実世界それぞれの長所を兼ね備えた新しい可能性を模索することを目指しました。
@@ -82,6 +82,7 @@ dartsduino
     * Polymer
       * [Extending other elements](http://www.polymer-project.org/docs/polymer/polymer.html#extending-other-elements)
 
+
 ## 企画上のアピールポイント
 
 元々の発端は、Mozilla さんが [Mecha-Mozilla](http://mecha-mozilla.org/) にて掲げている「ウェブと実世界のいい感じの関係性」に強い刺激を受けたことに始まりました。
@@ -91,3 +92,19 @@ dartsduino
 
 そこで、実世界でなされていることの一部を Web へシフトすることで自由度を高め、かつては固定的だったゲームをユーザが自由に改変・追加できることを目指しました。
 またソーシャルコーディングなどにより、これまでになかったまったく新しいダーツゲームを共創し評価できる場や文化を作り、Web の進化をダーツの世界へ持ち込めるか模索したい、と考えました。
+
+
+## 今後の予定
+
+* 他の人も市販のダーツボードを改造できるよう、改造方法を GitHub か [gitFAB](http://gitfab.org/) にて公開
+  * ちなみに回路は、下図のように、Arduino Nano にプルダウン抵抗をつなげただけの非常に簡素な回路です。
+    ![dartsduino-hw](https://dl.dropboxusercontent.com/u/972960/Documents/dartsduino/dartsduino-hw.png)
+* game-base や各ゲームのリファクタリング
+  * Web Components の素晴らしさに気づいたタイミングが応募締め切りの 10日ほど前で、まずは本作品が動作することを優先したため、
+    見直したい設計や気持ち悪い実装が残ってしまいました。リファクタリング、もしくはフルスクラッチで実装し直したいところです。
+  * index.html にて読み込んだ Bootstrap の CSS は、各ゲームの Shadow DOM に反映されない (works as designed) ため、
+    ゲームそれぞれでも Bootstrap の CSS を読み込んでいます。
+    Web Components の portability を高めるためにはこの仕様は正しいようにも思いますが、
+    たとえば theme change を実現する (1箇所の変更が全体に波及する) ケースなどにおいて、どのように設計・実装すれば良いのか、
+    まだ見通しがついていません。これを明らかにするため、試行錯誤してみる予定です。
+* 見栄え良くデザインしてくれる人を探す
