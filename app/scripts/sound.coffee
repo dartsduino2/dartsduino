@@ -23,21 +23,25 @@ class Sound
   play: (key, repeat) ->
     return unless @audios[key]?
 
-    repeat ||= 1
+    @doPlay key
 
-    @audios[key].currentTime = @SOUNDS[key].delay
-    @audios[key].play()
-
-    return if repeat is 1
+    return unless repeat > 1
     repeat--
 
     timer = setInterval =>
-      @audios[key].currentTime = @SOUNDS[key].delay
-      @audios[key].play()
+      @doPlay key
 
       repeat--
       if repeat is 0
         clearInterval timer
     , @DURATION
+
+  doPlay: (key) ->
+    clone = @audios[key].cloneNode false
+
+    @audios[key].currentTime = @SOUNDS[key].delay
+    @audios[key].play()
+
+    @audios[key] = clone
 
 window.Sound = Sound
