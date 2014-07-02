@@ -366,6 +366,14 @@ module.exports = function (grunt) {
             'styles/game-*.css'
           ],
           dest: '<%= config.dist %>'
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= config.app %>',
+          dest: '<%= config.dist %>',
+          src: [
+            'sounds/*'
+          ],
         }]
       },
       styles: {
