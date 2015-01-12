@@ -22,12 +22,12 @@ class Game
     $('#cancel-button').click @cancel
 
     @dartsUi = document.querySelector 'darts-ui'
-    # @dartsUi.addEventListener 'hit', @onHit
+    @dartsUi.addEventListener 'hit', @onHit
 
     @gameGroup = document.querySelector 'game-group'
     @gameGroup.addEventListener 'finish', @onFinish
 
-    # @sound = new Sound()
+    @sound = new Sound()
 
   onHit: =>
     {point, ratio} = event.detail
