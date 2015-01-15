@@ -3,6 +3,7 @@
 Polymer 'game-time-attack',
 
   MAX_COUNT: 30
+  COUNT_DURATION: 1000
   MAX_PRECOUNT: 3
 
   score: null
@@ -31,7 +32,7 @@ Polymer 'game-time-attack',
         @preTimer = null
 
         @doStart()
-    , 1000
+    , @COUNT_DURATION
 
   tick: ->
     @.$.precount.classList.remove 'tick'
@@ -47,7 +48,7 @@ Polymer 'game-time-attack',
         @.$.count.classList.add 'alert'
       else if @count is 0
         @over()
-    , 1000
+    , @COUNT_DURATION
 
   stop: ->
     if @preTimer?
@@ -59,18 +60,14 @@ Polymer 'game-time-attack',
       @timer = null
 
   onHit: (event) ->
-    if @timer is null
-      return
+    return unless @timer?
 
     point = parseInt event.detail.point
     ratio = parseInt event.detail.ratio
     @score += point * ratio
 
   over: ->
-    # console.log 'over'
-
-    clearInterval @timer
-    @timer = null
+    @stop()
 
     @finish
       message: "スコア: #{@score}"
