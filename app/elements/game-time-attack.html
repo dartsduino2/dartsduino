@@ -10,17 +10,19 @@
       <table class="score table table-bordered col-md-6">
         <tr>
           <td>残り時間</td>
-          <td id="count" style="text-align: right">{{count}}</td>
+          <td class="{{ { alert: timeLeft <= 5 } | tokenList }}">
+            {{timeLeft}}
+          </td>
         </tr>
         <tr>
           <td>スコア</td>
-          <td style="text-align: right">{{score}}</td>
+          <td>{{score}}</td>
         </tr>
       </table>
     </div>
 
-    <div id="precount">
-      {{preCount}}
+    <div class="jumbotext {{jumbotextClass}}">
+      {{jumbotext}}
     </div>
   </template>
 
