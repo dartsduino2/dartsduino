@@ -2,75 +2,56 @@
 
 Polymer 'game-time-attack',
 
-  MAX_COUNT: 30
-  MAX_PRECOUNT: 3
+  INTERVAL_DURATION: 1000
+  COUNT: 30
+  PRECOUNT: 3
 
   score: null
   timer: null
   count: null
-
-  preTimer: null
-  preCount: null
 
   initialize: ->
     @title = 'タイムアタック'
 
   start: ->
     @score = 0
-    @count = @MAX_COUNT
-    @tick()
+    @timeLeft = @COUNT
 
-    @preCount = @MAX_PRECOUNT
-    @preTimer = setInterval =>
-      @preCount--
+    @count = @COUNT + @PRECOUNT + 1
+    @timer = setInterval =>
       @tick()
 
-      if @preCount is 0
-        @preCount = ''
-        clearInterval @preTimer
-        @preTimer = null
+      @count--
+      if @count > @COUNT
+        @jumbotext = @count - @COUNT
+      else if @count is @COUNT
+        @jumbotext = ''
+      else
+        @timeLeft = @count
 
-        @doStart()
-    , 1000
+        @over() if @count <= 0
+    , @INTERVAL_DURATION
 
   tick: ->
-    @.$.precount.classList.remove 'tick'
+    @jumbotextClass = ''
     setTimeout =>
-      @.$.precount.classList.add 'tick'
-    , 100
-
-  doStart: ->
-    @timer = setInterval =>
-      @count--
-
-      if @count is 3
-        @.$.count.classList.add 'alert'
-      else if @count is 0
-        @over()
-    , 1000
+      @jumbotextClass = 'tick'
+    , 0
 
   stop: ->
-    if @preTimer?
-      clearInterval @preTimer
-      @preTimer = null
-
-    if @timer
+    if @timer?
       clearInterval @timer
       @timer = null
 
   onHit: (event) ->
-    if @timer is null
-      return
+    return unless @timer?
 
     point = parseInt event.detail.point
     ratio = parseInt event.detail.ratio
     @score += point * ratio
 
   over: ->
-    # console.log 'over'
-
-    clearInterval @timer
-    @timer = null
+    @stop()
 
     @finish
       message: "スコア: #{@score}"
