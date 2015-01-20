@@ -33,9 +33,11 @@ class Game
     {point, ratio} = event.detail
 
     if point is '25'
-      @sound.play 'bull', parseInt(ratio)
+      # @sound.play 'bull', parseInt(ratio)
+      @sound.play 'bull' + parseInt(ratio)
     else
-      @sound.play '1', parseInt(ratio)
+      # @sound.play '1', parseInt(ratio)
+      @sound.play ratio
 
   resizeWindow: ->
     bodyHeight = $('body').height()
@@ -51,6 +53,8 @@ class Game
       .css 'margin-left', marginLeft
 
   start: =>
+    @sound.play 'start'
+
     @dartsUi.setAttribute 'focuses', ' '
     @gameGroup.removeAttribute 'state'
 
@@ -62,6 +66,7 @@ class Game
     for game, i in games
       checked = if i is 0 then 'checked="checked"' else ''
       item = "<input type=\"radio\" name=\"type\" value=\"#{game}\" #{checked}> #{game}<br>"
+      console.log item
       gameItems.append item
 
     $('#myModal').modal 'show'
