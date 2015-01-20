@@ -6,6 +6,11 @@ class Game
     NOT_STARTED: 0
     PLAYING: 1
 
+  KeyCode =
+    ENTER: 13
+    UP: 38
+    DOWN: 40
+
   state: State.NOT_STARTED
   dartsUi: null
   gameGroup: null
@@ -33,9 +38,11 @@ class Game
     {point, ratio} = event.detail
 
     if point is '25'
-      @sound.play 'bull', parseInt(ratio)
+      # @sound.play 'bull', parseInt(ratio)
+      @sound.play 'bull' + parseInt(ratio)
     else
-      @sound.play '1', parseInt(ratio)
+      # @sound.play '1', parseInt(ratio)
+      @sound.play ratio
 
   resizeWindow: ->
     bodyHeight = $('body').height()
@@ -51,6 +58,8 @@ class Game
       .css 'margin-left', marginLeft
 
   start: =>
+    @sound.play 'start2'
+
     @dartsUi.setAttribute 'focuses', ' '
     @gameGroup.removeAttribute 'state'
 
@@ -61,12 +70,35 @@ class Game
 
     for game, i in games
       checked = if i is 0 then 'checked="checked"' else ''
-      item = "<input type=\"radio\" name=\"type\" value=\"#{game}\" #{checked}> #{game}<br>"
+      item = $("<input type=\"radio\" name=\"type\" value=\"#{game}\" #{checked}> #{game}<br>")
+      item.click =>
+        @sound.play 'click'
       gameItems.append item
 
     $('#myModal').modal 'show'
 
+    selectGame = (index) =>
+      $('#gameItems input')[index].checked = true
+      @sound.play 'click'
+
+    index = 0
+    $('#myModal').keydown (event) =>
+      switch event.keyCode
+        when KeyCode.ENTER then @select()
+
+        when KeyCode.UP
+          index--
+          index = games.length - 1 if index < 0
+          selectGame index
+
+        when KeyCode.DOWN
+          index++
+          index = 0 if index >= games.length
+          selectGame index
+
   select: =>
+    @sound.play 'start'
+
     games = $('#gameItems input')
     gameTitle = null
     for g, i in games
@@ -111,6 +143,8 @@ class Game
     $('#message').text message
 
     $('#resultModal').modal 'show'
+
+    @sound.play 'clap'
 
     @changeState State.NOT_STARTED
 
