@@ -6,6 +6,11 @@ class Game
     NOT_STARTED: 0
     PLAYING: 1
 
+  KeyCode =
+    ENTER: 13
+    UP: 38
+    DOWN: 40
+
   state: State.NOT_STARTED
   dartsUi: null
   gameGroup: null
@@ -79,14 +84,14 @@ class Game
     index = 0
     $('#myModal').keydown (event) =>
       switch event.keyCode
-        when 13 then @select()
+        when KeyCode.ENTER then @select()
 
-        when 38
+        when KeyCode.UP
           index--
           index = games.length - 1 if index < 0
           selectGame index
 
-        when 40
+        when KeyCode.DOWN
           index++
           index = 0 if index >= games.length
           selectGame index
