@@ -58,7 +58,7 @@ class Game
       .css 'margin-left', marginLeft
 
   start: =>
-    @sound.play 'click'
+    @sound.play 'start2'
 
     @dartsUi.setAttribute 'focuses', ' '
     @gameGroup.removeAttribute 'state'
@@ -143,6 +143,8 @@ class Game
     $('#message').text message
 
     $('#resultModal').modal 'show'
+
+    @sound.play 'clap'
 
     @changeState State.NOT_STARTED
 

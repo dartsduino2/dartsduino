@@ -37,6 +37,11 @@ class Sound
     'round2':
       file: 'dl/round2.ogg'
 
+    'start2':
+      file: '35750_variety-darts-button.wav'
+    'clap':
+      file: '35656_variety-clap.wav'
+
   DURATION: 160
 
   audios: {}
