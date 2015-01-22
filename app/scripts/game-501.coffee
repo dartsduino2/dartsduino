@@ -41,6 +41,7 @@ Polymer 'game-501',
       @totalScores[id] = prevScore
     else if @totalScores[id] is 0
       @over @currentPlayer
+      return
 
     @count++
     if @count > 3
