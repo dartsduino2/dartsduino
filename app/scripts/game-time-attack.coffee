@@ -66,7 +66,8 @@ Polymer 'game-time-attack',
 
     isMaxScore = @score > @maxScore
     if isMaxScore
+      @maxScore = @score
       localStorage['time-attack'] = @score
 
     @finish
-      message: "得点: #{@score}" + (if isMaxScore then '　★本日の最高得点!★' else '')
+      message: "得点 : #{@score}" + (if isMaxScore then '　★本日の最高得点!★' else '')
