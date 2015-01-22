@@ -2,7 +2,6 @@
 
 class Sound
 
-  # SOUND_DIR: 'sounds/'
   SOUND_DIR: 'sounds/'
   SOUNDS:
     '1':
@@ -46,6 +45,9 @@ class Sound
 
   audios: {}
 
+  sequence: []
+  timer: null
+
   constructor: ->
     for key, value of @SOUNDS
       @audios[key] = new Audio()
@@ -67,6 +69,27 @@ class Sound
         clearInterval timer
     , @DURATION
 
+  playSequence: (key, delay) ->
+    @sequence.push {key, delay}
+
+    @tickSequence()
+
+  tickSequence: ->
+    if @sequence.length is 0
+      @timer = null
+      return
+    else
+      if @timer?
+        return
+
+    {key, delay} = @sequence.shift()
+    @timer = setTimeout =>
+      @play key
+
+      @timer = null
+      @tickSequence()
+    , delay
+
   doPlay: (key) ->
     clone = @audios[key].cloneNode false
 
@@ -75,4 +98,4 @@ class Sound
 
     @audios[key] = clone
 
-window.Sound = Sound
+window.sound = new Sound()

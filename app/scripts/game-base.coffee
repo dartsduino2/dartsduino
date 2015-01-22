@@ -92,12 +92,16 @@ Polymer 'game-base',
     return
 
   nextPlayer: ->
-    isNext = false
+    isNextRound = false
     @currentPlayerIndex++
     if @currentPlayerIndex >= @playerList.length
       @currentPlayerIndex = 0
-      isNext = true
+      isNextRound = true
 
     @currentPlayer = @playerList[@currentPlayerIndex]
 
-    return isNext
+    window.sound.playSequence 'down', 1000
+    window.sound.playSequence 'round', 1000 if isNextRound
+    window.sound.playSequence 'up', 1500
+
+    return isNextRound

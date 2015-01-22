@@ -11,13 +11,12 @@ Polymer 'game-time-attack',
   timer: null
   count: null
 
-  sound: null
-
   initialize: ->
     @title = 'タイムアタック'
 
   start: ->
     @score = 0
+    @maxScore = localStorage['time-attack'] || 0
     @timeLeft = @COUNT
 
     @count = @COUNT + @PRECOUNT + @NO_COUNT + 1
@@ -28,19 +27,17 @@ Polymer 'game-time-attack',
       if @count > @COUNT + @PRECOUNT
       else if @COUNT + @PRECOUNT >= @count > @COUNT
         @jumbotext = @count - @COUNT
-        @sound.play 'click'
+        window.sound.play 'click'
       else if @count is @COUNT
         @jumbotext = ''
       else
         @timeLeft = @count
 
         if @count <= 5
-          @sound.play 'click'
+          window.sound.play 'click'
 
         @over() if @count <= 0
     , @INTERVAL_DURATION
-
-    @sound = new Sound()
 
   tick: ->
     @jumbotextClass = ''
@@ -63,5 +60,10 @@ Polymer 'game-time-attack',
   over: ->
     @stop()
 
+    isMaxScore = @score > @maxScore
+    if isMaxScore
+      @maxScore = @score
+      localStorage['time-attack'] = @score
+
     @finish
-      message: "スコア: #{@score}"
+      message: "得点 : #{@score}" + (if isMaxScore then '　★本日の最高得点!★' else '')
