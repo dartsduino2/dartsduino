@@ -2,7 +2,6 @@
 
 class Sound
 
-  # SOUND_DIR: 'sounds/'
   SOUND_DIR: 'sounds/'
   SOUNDS:
     '1':
