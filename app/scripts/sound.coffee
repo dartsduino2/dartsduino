@@ -74,4 +74,4 @@ class Sound
 
     @audios[key] = clone
 
-window.Sound = Sound
+window.sound = new Sound()

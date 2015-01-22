@@ -11,8 +11,6 @@ Polymer 'game-time-attack',
   timer: null
   count: null
 
-  sound: null
-
   initialize: ->
     @title = 'タイムアタック'
 
@@ -29,19 +27,17 @@ Polymer 'game-time-attack',
       if @count > @COUNT + @PRECOUNT
       else if @COUNT + @PRECOUNT >= @count > @COUNT
         @jumbotext = @count - @COUNT
-        @sound.play 'click'
+        window.sound.play 'click'
       else if @count is @COUNT
         @jumbotext = ''
       else
         @timeLeft = @count
 
         if @count <= 5
-          @sound.play 'click'
+          window.sound.play 'click'
 
         @over() if @count <= 0
     , @INTERVAL_DURATION
-
-    @sound = new Sound()
 
   tick: ->
     @jumbotextClass = ''

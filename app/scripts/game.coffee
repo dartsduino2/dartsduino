@@ -36,17 +36,13 @@ class Game
     @gameGroup = document.querySelector 'game-group'
     @gameGroup.addEventListener 'finish', @onFinish
 
-    @sound = new Sound()
-
   onHit: =>
     {point, ratio} = event.detail
 
     if point is '25'
-      # @sound.play 'bull', parseInt(ratio)
-      @sound.play 'bull' + parseInt(ratio)
+      window.sound.play 'bull' + parseInt(ratio)
     else
-      # @sound.play '1', parseInt(ratio)
-      @sound.play ratio
+      window.sound.play ratio
 
   resizeWindow: ->
     bodyHeight = $('body').height()
@@ -62,7 +58,7 @@ class Game
       .css 'margin-left', marginLeft
 
   start: =>
-    @sound.play 'start2'
+    window.sound.play 'start2'
 
     @dartsUi.setAttribute 'focuses', ' '
     @gameGroup.removeAttribute 'state'
@@ -83,7 +79,7 @@ class Game
 
     selectGame = (index) =>
       $('#gameItems input')[index].checked = true
-      @sound.play 'click'
+      window.sound.play 'click'
 
     index = 0
     $('#myModal').keydown (event) =>
@@ -101,7 +97,7 @@ class Game
           selectGame index
 
   select: =>
-    @sound.play 'start'
+    window.sound.play 'start'
 
     games = $('#gameItems input')
     gameTitle = null
@@ -148,7 +144,7 @@ class Game
 
     $('#resultModal').modal 'show'
 
-    @sound.play 'clap'
+    window.sound.play 'clap'
 
     @changeState State.NOT_STARTED
 
