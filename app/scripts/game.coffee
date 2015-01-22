@@ -26,6 +26,10 @@ class Game
     $('#select-button').click @select
     $('#cancel-button').click @cancel
 
+    # $(document.body).keydown =>
+    #   if event.keyCode is KeyCode.ENTER
+    #     @start()
+
     @dartsUi = document.querySelector 'darts-ui'
     @dartsUi.addEventListener 'hit', @onHit
 
