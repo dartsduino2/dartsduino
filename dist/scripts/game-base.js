@@ -89,15 +89,20 @@
       }
     },
     nextPlayer: function() {
-      var isNext;
-      isNext = false;
+      var isNextRound;
+      isNextRound = false;
       this.currentPlayerIndex++;
       if (this.currentPlayerIndex >= this.playerList.length) {
         this.currentPlayerIndex = 0;
-        isNext = true;
+        isNextRound = true;
       }
       this.currentPlayer = this.playerList[this.currentPlayerIndex];
-      return isNext;
+      window.sound.playSequence('down', 1000);
+      if (isNextRound) {
+        window.sound.playSequence('round', 1000);
+      }
+      window.sound.playSequence('up', 1500);
+      return isNextRound;
     }
   });
 

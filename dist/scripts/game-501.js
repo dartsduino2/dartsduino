@@ -39,6 +39,7 @@
         this.totalScores[id] = prevScore;
       } else if (this.totalScores[id] === 0) {
         this.over(this.currentPlayer);
+        return;
       }
       this.count++;
       if (this.count > 3) {
